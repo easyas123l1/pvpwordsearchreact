@@ -10,8 +10,6 @@ import AddPuzzle from "./components/Puzzle/AddPuzzle";
 import CreatePuzzle from "./components/Puzzle/CreatePuzzle";
 import AllPuzzles from "./components/Puzzle/AllPuzzles";
 import PlayPuzzle from "./components/Puzzle/PlayPuzzle";
-import WorldRecord from "./components/WorldRecord/WorldRecord";
-import WorldRecordWords from "./components/WorldRecord/WorldRecordWords";
 import Victory from "./components/Puzzle/Victory";
 import { getUserInfo } from "./store/actions/userAction";
 import LandingPage from "./components/Landing/LandingPage";
@@ -35,16 +33,10 @@ function App({ getUserInfo, loggedInStatus }) {
         <Route path="/login" component={Login} />
         <Route path="/allPuzzles" component={AllPuzzles} />
         <Route path="/playPuzzle" component={PlayPuzzle} />
-        <Route path="/worldRecord" component={WorldRecord} />
-        <Route path="/worldRecordWords" component={WorldRecordWords} />
         <Route path="/completePuzzle" component={Victory} />
         <Route path="/printPuzzle" component={PrintPuzzle} />
-        <PrivateRoute path="/addPuzzle">
-          <AddPuzzle />
-        </PrivateRoute>
-        <PrivateRoute path="/createPuzzle">
-          <CreatePuzzle />
-        </PrivateRoute>
+        <Route path="/createPuzzle" component={CreatePuzzle} />
+        <Route path="/addPuzzle" component={AddPuzzle} />
         <Route component={LandingPage} />
         {/* default route incase route doesn't exist */}
       </Switch>

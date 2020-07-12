@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 import { connect } from "react-redux";
 import puzzle from "../../styles/puzzle.module.scss";
 import classnames from "classnames";
@@ -66,7 +66,7 @@ const PlayPuzzle = ({
         if (j + 1 === size) {
           const newLine = {
             text: line,
-            id: uuid.v4(),
+            id: uuid(),
           };
           newLines.push(newLine);
         }

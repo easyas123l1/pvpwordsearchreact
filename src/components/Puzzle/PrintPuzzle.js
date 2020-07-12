@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import puzzle from "../../styles/puzzle.module.scss";
 import { connect } from "react-redux";
-import uuid from "uuid";
+import { v4 as uuid } from "uuid";
 
 function PrintPuzzle({ words, name, code }) {
   const [lines, setLines] = useState([]);
@@ -36,7 +36,7 @@ function PrintPuzzle({ words, name, code }) {
         if (j + 1 === size) {
           const newLine = {
             text: line,
-            id: uuid.v4(),
+            id: uuid(),
           };
           newLines.push(newLine);
         }

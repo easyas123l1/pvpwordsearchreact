@@ -33,7 +33,7 @@ const NavBar = ({ loggedIn, logoutUser }) => {
           All Puzzles
         </Link>
       </div>
-      <div>
+      {/* <div>
         <Link
           to="/worldRecord"
           className={puzzle.aTag}
@@ -50,45 +50,41 @@ const NavBar = ({ loggedIn, logoutUser }) => {
         >
           World Record Words
         </Link>
-      </div>
-      {!loggedIn && (
-        <>
-          <div>
-            <Link
-              to="/register"
-              className={puzzle.aTag}
-              activeStyle={{ color: "#ffb81c" }}
-            >
-              Register
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="/login"
-              className={puzzle.aTag}
-              activeStyle={{ color: "#ffb81c" }}
-            >
-              Login
-            </Link>
-          </div>
-        </>
-      )}
-      {loggedIn && (
-        <>
-          <div>
-            <Link
-              to="/createPuzzle"
-              className={puzzle.aTag}
-              activeStyle={{ color: "#ffb81c" }}
-            >
-              Create Puzzle
-            </Link>
-          </div>
-          <button onClick={logout} className={puzzle.logout}>
+      </div> */}
+      {/* <>
+        <div>
+          <Link
+            to="/register"
+            className={puzzle.aTag}
+            activeStyle={{ color: "#ffb81c" }}
+          >
+            Register
+          </Link>
+        </div>
+        <div>
+          <Link
+            to="/login"
+            className={puzzle.aTag}
+            activeStyle={{ color: "#ffb81c" }}
+          >
+            Login
+          </Link>
+        </div>
+      </> */}
+      <>
+        <div>
+          <Link
+            to="/createPuzzle"
+            className={puzzle.aTag}
+            activeStyle={{ color: "#ffb81c" }}
+          >
+            Create Puzzle
+          </Link>
+        </div>
+        {/* <button onClick={logout} className={puzzle.logout}>
             Logout
-          </button>
-        </>
-      )}
+          </button> */}
+      </>
     </div>
   );
 };
