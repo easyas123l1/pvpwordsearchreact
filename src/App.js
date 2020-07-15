@@ -11,18 +11,55 @@ import CreatePuzzle from "./components/Puzzle/CreatePuzzle";
 import AllPuzzles from "./components/Puzzle/AllPuzzles";
 import PlayPuzzle from "./components/Puzzle/PlayPuzzle";
 import Victory from "./components/Puzzle/Victory";
-import { getUserInfo } from "./store/actions/userAction";
+import { loginUser } from "./store/actions/userAction";
 import LandingPage from "./components/Landing/LandingPage";
 import PrintPuzzle from "./components/Puzzle/PrintPuzzle";
 
-function App({ getUserInfo, loggedInStatus }) {
-  const loggedIn = localStorage.getItem("token");
+function App({ loginUser, loggedInStatus }) {
+  const insertGapiScript = () => {
+    const script = document.createElement("script");
+    script.src = "https://apis.google.com/js/platform.js";
+    script.onload = () => {
+      initializeGoogleSignIn();
+    };
+    document.body.appendChild(script);
+  };
+
+  const initializeGoogleSignIn = () => {
+    window.gapi.load("auth2", () => {
+      window.gapi.auth2
+        .init({
+          client_id: process.env.REACT_APP_CLIENT_ID,
+        })
+        .then(() => {
+          const authInstance = window.gapi.auth2.getAuthInstance();
+          const isSignedIn = authInstance.isSignedIn.get();
+          // this is where we will call userAction signIn
+          loginUser(isSignedIn);
+          authInstance.isSignedIn.listen((isSignedIn) => {
+            if (loggedInStatus !== isSignedIn) {
+              loginUser(isSignedIn);
+            }
+          });
+        });
+      console.log("Api inited");
+
+      window.gapi.load("signin2", () => {
+        const params = {
+          onsuccess: () => {
+            console.log("User has finished signing in!");
+          },
+        };
+
+        window.gapi.signin2.render("loginButton", params);
+      });
+    });
+  };
 
   useEffect(() => {
-    if (loggedIn && !loggedInStatus) {
-      getUserInfo();
-    }
-  }, [loggedIn, getUserInfo, loggedInStatus]);
+    console.log("Loading");
+    insertGapiScript();
+  });
 
   return (
     <>
@@ -46,8 +83,8 @@ function App({ getUserInfo, loggedInStatus }) {
 
 const mapStateToProps = (state) => {
   return {
-    loggedInStatus: state.puzzleReducer.loggedIn,
+    loggedInStatus: state.userReducer.loggedIn,
   };
 };
 
-export default connect(mapStateToProps, { getUserInfo })(App);
+export default connect(mapStateToProps, { loginUser })(App);

@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink as Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser } from "../../store/actions/userAction";
+import { logoutUser, getUserInfo } from "../../store/actions/userAction";
 import puzzle from "../../styles/puzzle.module.scss";
 
 const NavBar = ({ loggedIn, logoutUser }) => {
+  const [imageUrl, setImageUrl] = useState("");
+  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
+  const [profile, setProfile] = useState("");
+  const [id, setId] = useState(null);
+  const [dropdown, setDropdown] = useState(false);
+  console.log(dropdown);
+  useEffect(() => {
+    if (loggedIn) {
+      const authInstance = window.gapi.auth2.getAuthInstance();
+      const getuser = authInstance.currentUser.get();
+      const getprofile = getuser.getBasicProfile();
+      setEmail(getprofile.getEmail());
+      setImageUrl(getprofile.getImageUrl());
+      setUser(getuser);
+      setProfile(getprofile);
+      setId(getprofile.getId());
+    }
+  }, [loggedIn]);
   const history = useHistory();
 
   const logout = (e) => {
     e.preventDefault();
-    logoutUser();
-    history.push("/login");
+    window.gapi.auth2.getAuthInstance().signOut();
+    history.push("/home");
   };
 
   return (
@@ -24,67 +43,47 @@ const NavBar = ({ loggedIn, logoutUser }) => {
           Home
         </Link>
       </div>
-      <div>
-        <Link
-          to="/allPuzzles"
-          className={puzzle.aTag}
-          activeStyle={{ color: "#ffb81c" }}
-        >
-          All Puzzles
-        </Link>
-      </div>
-      {/* <div>
-        <Link
-          to="/worldRecord"
-          className={puzzle.aTag}
-          activeStyle={{ color: "#ffb81c" }}
-        >
-          World Record Puzzle
-        </Link>
-      </div>
-      <div>
-        <Link
-          to="/worldRecordWords"
-          className={puzzle.aTag}
-          activeStyle={{ color: "#ffb81c" }}
-        >
-          World Record Words
-        </Link>
-      </div> */}
-      {/* <>
+      {loggedIn && (
+        <>
+          <div>
+            <Link
+              to="/allPuzzles"
+              className={puzzle.aTag}
+              activeStyle={{ color: "#ffb81c" }}
+            >
+              All Puzzles
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="/createPuzzle"
+              className={puzzle.aTag}
+              activeStyle={{ color: "#ffb81c" }}
+            >
+              Create Puzzle
+            </Link>
+          </div>
+          <div>
+            <img
+              onClick={() => setDropdown(!dropdown)}
+              className={puzzle.imageURL}
+              src={imageUrl}
+              role="button"
+              alt="drop-down"
+            />
+            {dropdown && (
+              <div className={puzzle.dropdown}>
+                <button onClick={(e) => logout(e)}>logout</button>
+              </div>
+            )}
+          </div>
+        </>
+      )}
+      {!loggedIn && (
         <div>
-          <Link
-            to="/register"
-            className={puzzle.aTag}
-            activeStyle={{ color: "#ffb81c" }}
-          >
-            Register
-          </Link>
+          <button id="loginButton">Sign in</button>
         </div>
-        <div>
-          <Link
-            to="/login"
-            className={puzzle.aTag}
-            activeStyle={{ color: "#ffb81c" }}
-          >
-            Login
-          </Link>
-        </div>
-      </> */}
-      <>
-        <div>
-          <Link
-            to="/createPuzzle"
-            className={puzzle.aTag}
-            activeStyle={{ color: "#ffb81c" }}
-          >
-            Create Puzzle
-          </Link>
-        </div>
-        {/* <button onClick={logout} className={puzzle.logout}>
-            Logout
-          </button> */}
-      </>
+      )}
     </div>
   );
 };

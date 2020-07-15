@@ -1,58 +1,42 @@
 import {
-  START_LOGIN,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE,
   BEGIN_GET_USER_INFO,
   GET_USER_INFO_SUCCESS,
   GET_USER_INFO_FAILURE,
   BEGIN_LOGOUT,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
 } from "../actions/userAction";
 
 const initState = {
   user: {
     name: "",
-    id: null
+    id: null,
   },
   isAuthenticating: false,
   loggedIn: false,
-  authenticationError: ""
+  authenticationError: "",
 };
 
 export const userReducer = (state = initState, action) => {
   switch (action.type) {
-    case START_LOGIN:
-      return {
-        ...state,
-        isAuthenticating: true,
-        authenticationError: ""
-      };
-
     case LOGIN_SUCCESS:
       return {
         ...state,
         isAuthenticating: false,
-        loggedIn: true,
+        loggedIn: action.payload,
         authenticationError: "",
-        user: {
-          ...state.user,
-          name: action.payload.user.username,
-          id: action.payload.user.id
-        }
-      };
-
-    case LOGIN_FAILURE:
-      return {
-        ...state,
-        authenticationError: action.payload,
-        isAuthenticating: false
+        // user: {
+        //   ...state.user,
+        //   name: action.payload.user.username,
+        //   id: action.payload.user.id,
+        // },
       };
 
     case BEGIN_GET_USER_INFO:
       return {
         ...state,
         isAuthenticating: true,
-        authenticationError: ""
+        authenticationError: "",
       };
 
     case GET_USER_INFO_SUCCESS:
@@ -64,8 +48,8 @@ export const userReducer = (state = initState, action) => {
         user: {
           ...state.user,
           name: action.payload.username,
-          id: action.payload.id
-        }
+          id: action.payload.id,
+        },
       };
 
     case GET_USER_INFO_FAILURE:
@@ -73,14 +57,14 @@ export const userReducer = (state = initState, action) => {
         ...state,
         isAuthenticating: false,
         loggedIn: false,
-        authenticationError: action.payload
+        authenticationError: action.payload,
       };
 
     case BEGIN_LOGOUT:
       return {
         ...state,
         isAuthenticating: true,
-        authenticationError: ""
+        authenticationError: "",
       };
 
     case LOGOUT_SUCCESS:
@@ -88,12 +72,12 @@ export const userReducer = (state = initState, action) => {
         ...state,
         user: initState.user,
         isAuthenticating: false,
-        loggedIn: false
+        loggedIn: false,
       };
 
     default:
       return {
-        ...state
+        ...state,
       };
   }
 };
