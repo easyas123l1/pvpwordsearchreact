@@ -25,6 +25,27 @@ function App({ loginUser, loggedInStatus }) {
     document.body.appendChild(script);
   };
 
+  const getUserInfo = (isSignedIn) => {
+    let email = "";
+    let imageUrl = "";
+    let id = "";
+    if (isSignedIn) {
+      const authInstance = window.gapi.auth2.getAuthInstance();
+      const getuser = authInstance.currentUser.get();
+      const getprofile = getuser.getBasicProfile();
+      email = getprofile.getEmail();
+      imageUrl = getprofile.getImageUrl();
+      id = getprofile.getId();
+    }
+    const user = {
+      email,
+      imageUrl,
+      id,
+      isSignedIn,
+    };
+    loginUser(user);
+  };
+
   const initializeGoogleSignIn = () => {
     window.gapi.load("auth2", () => {
       window.gapi.auth2
@@ -34,11 +55,10 @@ function App({ loginUser, loggedInStatus }) {
         .then(() => {
           const authInstance = window.gapi.auth2.getAuthInstance();
           const isSignedIn = authInstance.isSignedIn.get();
-          // this is where we will call userAction signIn
-          loginUser(isSignedIn);
+          getUserInfo(isSignedIn);
           authInstance.isSignedIn.listen((isSignedIn) => {
             if (loggedInStatus !== isSignedIn) {
-              loginUser(isSignedIn);
+              getUserInfo(isSignedIn);
             }
           });
         });

@@ -3,14 +3,13 @@ import {
   BEGIN_GET_USER_INFO,
   GET_USER_INFO_SUCCESS,
   GET_USER_INFO_FAILURE,
-  BEGIN_LOGOUT,
-  LOGOUT_SUCCESS,
 } from "../actions/userAction";
 
 const initState = {
   user: {
-    name: "",
+    email: "",
     id: null,
+    imageUrl: "",
   },
   isAuthenticating: false,
   loggedIn: false,
@@ -22,14 +21,14 @@ export const userReducer = (state = initState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        user: {
+          email: action.payload.email,
+          id: action.payload.id,
+          imageUrl: action.payload.imageUrl,
+        },
         isAuthenticating: false,
-        loggedIn: action.payload,
+        loggedIn: action.payload.isSignedIn,
         authenticationError: "",
-        // user: {
-        //   ...state.user,
-        //   name: action.payload.user.username,
-        //   id: action.payload.user.id,
-        // },
       };
 
     case BEGIN_GET_USER_INFO:
@@ -59,22 +58,6 @@ export const userReducer = (state = initState, action) => {
         loggedIn: false,
         authenticationError: action.payload,
       };
-
-    case BEGIN_LOGOUT:
-      return {
-        ...state,
-        isAuthenticating: true,
-        authenticationError: "",
-      };
-
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        user: initState.user,
-        isAuthenticating: false,
-        loggedIn: false,
-      };
-
     default:
       return {
         ...state,
