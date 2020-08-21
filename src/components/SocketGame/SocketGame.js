@@ -1,27 +1,18 @@
 import React, { useState } from "react";
 import puzzle from "../../styles/puzzle.module.scss";
-import io from "socket.io-client";
 import GameLobbyList from "./GameLobbyList";
+import { socket } from "../../App";
 
-const socket = io("http://localhost:4999", {
-    query: `gapiname=${window.gapi}`,
-});
-
-export default function SocketGame() {
+const SocketGame = ({ email, conn, error }) => {
     const [createName, setCreateName] = useState("");
     const [rooms, setRooms] = useState([]);
 
-    // greeting message will prolly delete
-    socket.on("welcome", (data) => {
-        console.log(data);
-    });
-
-    // receiving room data
+    // receiving rooms data
     socket.on("rooms", (data) => {
-        console.log(data);
         setRooms(data);
     });
 
+    // enter game room
     socket.on("enteredRoom", (data) => {
         console.log(data);
     });
@@ -41,37 +32,54 @@ export default function SocketGame() {
     const changeName = (e) => {
         setCreateName(e.target.value);
     };
-
-    return (
-        <div className={puzzle.spacer}>
-            <div className={puzzle.background}>
-                <div>
-                    <p>create a lobby</p>
-                    <input
-                        type="text"
-                        name="newGame"
-                        onChange={changeName}
-                        placeholder="Title the game room!"
-                        value={createName}
-                        // className={puzzle.space}
-                    />
-                    <button onClick={createGame}>Create Game</button>
-                </div>
-                <div>
-                    <p>join a lobby</p>
-                    <div>
-                        {rooms.map((room) => {
-                            return (
-                                <GameLobbyList
-                                    room={room}
-                                    joinGame={joinGame}
-                                    key={room.id}
-                                />
-                            );
-                        })}
+    if (error) {
+        return (
+            <div className={puzzle.spacer}>
+                <div className={puzzle.background}>{error}</div>
+            </div>
+        );
+    } else {
+        if (email && conn) {
+            return (
+                <div className={puzzle.spacer}>
+                    <div className={puzzle.background}>
+                        <div>
+                            <p>create a lobby</p>
+                            <input
+                                type="text"
+                                name="newGame"
+                                onChange={changeName}
+                                placeholder="Title the game room!"
+                                value={createName}
+                                // className={puzzle.space}
+                            />
+                            <button onClick={createGame}>Create Game</button>
+                        </div>
+                        <div>
+                            <p>join a lobby</p>
+                            <div>
+                                {rooms.map((room) => {
+                                    return (
+                                        <GameLobbyList
+                                            room={room}
+                                            joinGame={joinGame}
+                                            key={room.id}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    );
-}
+            );
+        } else {
+            return (
+                <div className={puzzle.spacer}>
+                    <div className={puzzle.background}>Please login</div>
+                </div>
+            );
+        }
+    }
+};
+
+export default SocketGame;

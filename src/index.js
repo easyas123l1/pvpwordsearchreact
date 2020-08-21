@@ -11,20 +11,20 @@ import { userReducer } from "./store/reducers/userReducer";
 import { puzzleReducer } from "./store/reducers/puzzleReducer";
 
 const rootReducer = combineReducers({
-  userReducer,
-  puzzleReducer,
+    userReducer,
+    puzzleReducer,
 });
 
 const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById("root")
+    <Provider store={store}>
+        <Router>
+            <App />
+        </Router>
+    </Provider>,
+    document.getElementById("root")
 );

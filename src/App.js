@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import io from "socket.io-client";
 import "./styles/global.scss";
 import NavBar from "./components/NavBar/NavBar";
 import AddPuzzle from "./components/Puzzle/AddPuzzle";
@@ -13,7 +14,29 @@ import LandingPage from "./components/Landing/LandingPage";
 import PrintPuzzle from "./components/Puzzle/PrintPuzzle";
 import SocketGame from "./components/SocketGame/SocketGame";
 
+export const socket = io("http://localhost:4999");
+
 function App({ loginUser, loggedInStatus }) {
+    const [mail, setMail] = useState("");
+    const [conn, setConn] = useState(false);
+    const [error, setError] = useState("");
+
+    socket.on("getUserInfo", () => {
+        if (mail) {
+            socket.emit("userInfo", mail);
+        }
+    });
+
+    socket.on("alreadyConnected", () => {
+        setConn(false);
+        setError("this account is already logged in");
+    });
+
+    socket.on("goodConnection", () => {
+        setConn(true);
+        setError("");
+    });
+
     const insertGapiScript = () => {
         const script = document.createElement("script");
         script.src = "https://apis.google.com/js/platform.js";
@@ -42,6 +65,10 @@ function App({ loginUser, loggedInStatus }) {
             isSignedIn,
         };
         loginUser(user);
+        if (email) {
+            socket.emit("userInfo", email);
+            setMail(email);
+        }
     };
 
     const initializeGoogleSignIn = () => {
@@ -90,7 +117,17 @@ function App({ loginUser, loggedInStatus }) {
                 <Route path="/printPuzzle" component={PrintPuzzle} />
                 <Route path="/createPuzzle" component={CreatePuzzle} />
                 <Route path="/addPuzzle" component={AddPuzzle} />
-                <Route path="/socketGame" component={SocketGame} />
+                <Route
+                    path="/socketGame"
+                    render={(props) => (
+                        <SocketGame
+                            {...props}
+                            email={mail}
+                            conn={conn}
+                            error={error}
+                        />
+                    )}
+                />
                 <Route component={LandingPage} />
                 {/* default route incase route doesn't exist */}
             </Switch>
