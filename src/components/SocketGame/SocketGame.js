@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import puzzle from "../../styles/puzzle.module.scss";
-import GameLobbyList from "./GameLobbyList";
+import PreGameRoomLobby from "./PreGameRoomLobby";
+import MainScreenFindCreateGame from "./MainScreenFindCreateGame";
+import GameRoomLobby from "./GameRoomLobby";
 import { socket } from "../../App";
 
-const SocketGame = ({ email, conn, error }) => {
+const initState = {
+    players: [],
+    id: null,
+    name: "",
+    state: "",
+};
+
+const SocketGame = ({ email, conn, error, serverId }) => {
     const [createName, setCreateName] = useState("");
     const [rooms, setRooms] = useState([]);
+    const [room, setRoom] = useState(initState);
 
     // receiving rooms data
     socket.on("rooms", (data) => {
@@ -13,8 +23,13 @@ const SocketGame = ({ email, conn, error }) => {
     });
 
     // enter game room
-    socket.on("enteredRoom", (data) => {
-        console.log(data);
+    socket.on("roomInfo", (data) => {
+        setRoom(data);
+    });
+
+    // game room ended due to host leaving only happens before games start.
+    socket.on("lobbyClosedHostLeft", () => {
+        setRoom(initState);
     });
 
     // create game room
@@ -32,6 +47,7 @@ const SocketGame = ({ email, conn, error }) => {
     const changeName = (e) => {
         setCreateName(e.target.value);
     };
+    // error means already logged into account
     if (error) {
         return (
             <div className={puzzle.spacer}>
@@ -39,40 +55,31 @@ const SocketGame = ({ email, conn, error }) => {
             </div>
         );
     } else {
+        // logged in good connection!
         if (email && conn) {
-            return (
-                <div className={puzzle.spacer}>
-                    <div className={puzzle.background}>
-                        <div>
-                            <p>create a lobby</p>
-                            <input
-                                type="text"
-                                name="newGame"
-                                onChange={changeName}
-                                placeholder="Title the game room!"
-                                value={createName}
-                                // className={puzzle.space}
-                            />
-                            <button onClick={createGame}>Create Game</button>
-                        </div>
-                        <div>
-                            <p>join a lobby</p>
-                            <div>
-                                {rooms.map((room) => {
-                                    return (
-                                        <GameLobbyList
-                                            room={room}
-                                            joinGame={joinGame}
-                                            key={room.id}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
+            // in a game room
+            if (room.id) {
+                // game started
+                if (room.state !== "FILLING") {
+                    return <GameRoomLobby />;
+                } else {
+                    //game not started lfm players
+                    return <PreGameRoomLobby />;
+                }
+            } else {
+                //not in a game room
+                return (
+                    <MainScreenFindCreateGame
+                        changeName={changeName}
+                        createName={createName}
+                        createGame={createGame}
+                        rooms={rooms}
+                        joinGame={joinGame}
+                    />
+                );
+            }
         } else {
+            // not logged in with google/server.
             return (
                 <div className={puzzle.spacer}>
                     <div className={puzzle.background}>Please login</div>
