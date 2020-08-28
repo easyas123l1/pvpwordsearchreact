@@ -17,7 +17,7 @@ import SocketGame from "./components/SocketGame/SocketGame";
 export const socket = io("http://localhost:4999");
 
 function App({ loginUser, loggedInStatus }) {
-    const [mail, setMail] = useState("");
+    const [mail, setMail] = useState("fake"); // this needs to be changed to ""
     const [conn, setConn] = useState(false);
     const [error, setError] = useState("");
     const [serverId, setServerId] = useState(null);
