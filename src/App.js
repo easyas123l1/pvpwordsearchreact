@@ -20,6 +20,7 @@ function App({ loginUser, loggedInStatus }) {
     const [mail, setMail] = useState("");
     const [conn, setConn] = useState(false);
     const [error, setError] = useState("");
+    const [serverId, setServerId] = useState(null);
 
     socket.on("getUserInfo", () => {
         if (mail) {
@@ -32,9 +33,10 @@ function App({ loginUser, loggedInStatus }) {
         setError("this account is already logged in");
     });
 
-    socket.on("goodConnection", () => {
+    socket.on("goodConnection", (id) => {
         setConn(true);
         setError("");
+        setServerId(id);
     });
 
     const insertGapiScript = () => {
@@ -68,6 +70,8 @@ function App({ loginUser, loggedInStatus }) {
         if (email) {
             socket.emit("userInfo", email);
             setMail(email);
+        } else {
+            setServerId(null);
         }
     };
 
@@ -125,6 +129,7 @@ function App({ loginUser, loggedInStatus }) {
                             email={mail}
                             conn={conn}
                             error={error}
+                            serverId={serverId}
                         />
                     )}
                 />
