@@ -7,12 +7,12 @@ import {
 
 const initState = {
     user: {
-        email: "fake", //this needs to be changed to ''
+        email: "", //this needs to be changed to '' or 'fake' for offline
         id: null,
         imageUrl: "",
     },
     isAuthenticating: false,
-    loggedIn: true, //this needs to be changed to false
+    loggedIn: false, //this needs to be changed to false, or true for offline
     authenticationError: "",
 };
 
