@@ -11,6 +11,7 @@ const initState = {
     id: null,
     name: "",
     state: "",
+    hostId: null,
     puzzle: {
         size: null,
         numberOfWords: null,
@@ -83,7 +84,7 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                 // game started
                 if (room.state === "FILLING") {
                     //game not started lfm players
-                    return <PreGameRoomLobby />;
+                    return <PreGameRoomLobby room={room} serverId={serverId} />;
                 } else if (room.state === "STARTING") {
                     // game is starting coundown!
                     return <GameRoomLobbyStarting />;
