@@ -17,6 +17,7 @@ const initState = {
         numberOfWords: null,
         timer: null,
         words: [],
+        wordsDir: [],
         puzzle: "",
     },
 };
@@ -52,8 +53,8 @@ const SocketGame = ({ email, conn, error, serverId }) => {
     const createGame = (e) => {
         const roomInfo = {
             name: createName,
-            size: 20,
-            numberOfWords: 30,
+            size: 30,
+            numberOfWords: 13,
             timer: 300,
         };
         socket.emit("createRoom", roomInfo);
@@ -63,6 +64,17 @@ const SocketGame = ({ email, conn, error, serverId }) => {
     const joinGame = (e) => {
         const roomid = e.target.id;
         socket.emit("joinRoom", roomid);
+    };
+
+    // start game room (only for host)
+    const startGame = (e) => {
+        socket.emit("startGame");
+    };
+
+    // leave game room
+    const leaveRoom = (e) => {
+        socket.emit("leaveRoom");
+        setRoom(initState);
     };
 
     // change game room name
@@ -84,16 +96,30 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                 // game started
                 if (room.state === "FILLING") {
                     //game not started lfm players
-                    return <PreGameRoomLobby room={room} serverId={serverId} />;
+                    return (
+                        <PreGameRoomLobby
+                            room={room}
+                            serverId={serverId}
+                            startGame={startGame}
+                            leaveRoom={leaveRoom}
+                        />
+                    );
                 } else if (room.state === "STARTING") {
                     // game is starting coundown!
                     return <GameRoomLobbyStarting />;
                 } else if (room.state === "START") {
                     // game has started!
-                    return <GameRoomLobby />;
+                    return <GameRoomLobby room={room} leaveRoom={leaveRoom} />;
                 } else {
                     // default case for state.
-                    return <PreGameRoomLobby />;
+                    return (
+                        <PreGameRoomLobby
+                            room={room}
+                            serverId={serverId}
+                            startGame={startGame}
+                            leaveRoom={leaveRoom}
+                        />
+                    );
                 }
             } else {
                 //not in a game room
