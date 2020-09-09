@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import puzzle from "../../styles/puzzle.module.scss";
 
-const PreGameRoomLobby = ({ room, serverId }) => {
+const PreGameRoomLobby = ({ room, serverId, startGame, leaveRoom }) => {
     const [host, setHost] = useState(false);
 
     useEffect(() => {
@@ -28,6 +28,10 @@ const PreGameRoomLobby = ({ room, serverId }) => {
                 <p>puzzle timer {room.puzzle.timer}</p>
                 <p>puzzle code {room.puzzle.puzzle}</p>
                 <p>user is host? {host ? "true" : "false"}</p>
+                <button onClick={startGame} disabled={!host}>
+                    Start
+                </button>
+                <button onClick={leaveRoom}>Leave</button>
             </div>
         </div>
     );
