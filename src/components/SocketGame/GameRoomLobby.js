@@ -15,7 +15,7 @@ const GameRoomLobby = ({ room, leaveRoom }) => {
                 <p>puzzle size {room.puzzle.size}</p>
                 <p>puzzle number of words {room.puzzle.numberOfWords}</p>
                 <p>puzzle timer {room.puzzle.timer}</p>
-                <p>puzzle code {room.puzzle.puzzle}</p>
+                <p>puzzle code {room.puzzle.puzzle ? "true" : "false"}</p>
                 <button onClick={leaveRoom}>Leave</button>
             </div>
         </div>

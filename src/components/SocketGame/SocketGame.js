@@ -16,6 +16,7 @@ const initState = {
         size: null,
         numberOfWords: null,
         timer: null,
+        minimumWordSize: null,
         words: [],
         wordsDir: [],
         puzzle: "",
@@ -56,6 +57,8 @@ const SocketGame = ({ email, conn, error, serverId }) => {
             size: 30,
             numberOfWords: 13,
             timer: 300,
+            minimumWordSize: 2,
+            maximumWordSize: 10,
         };
         socket.emit("createRoom", roomInfo);
     };
