@@ -1,0 +1,112 @@
+p {
+  text-align: center;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.cyan {
+  border-radius: 50%;
+  background: cyan;
+}
+
+.red {
+  border-radius: 50%;
+  background: red;
+}
+
+.green {
+  border-radius: 50%;
+  background: green;
+}
+
+.orange {
+  border-radius: 50%;
+  background: orange;
+}
+
+.pink {
+  border-radius: 50%;
+  background: pink;
+}
+
+.yellow {
+  border-radius: 50%;
+  background: yellow;
+}
+
+.purple {
+  border-radius: 50%;
+  background: purple;
+}
+
+.brown {
+  border-radius: 50%;
+  background: brown;
+}
+
+.silver {
+  border-radius: 50%;
+  background: silver;
+}
+
+.cyanword {
+  text-decoration: line-through;
+  color: cyan;
+}
+
+.redword {
+  text-decoration: line-through;
+  color: red;
+}
+
+.greenword {
+  text-decoration: line-through;
+  color: green;
+}
+
+.orangeword {
+  text-decoration: line-through;
+  color: orange;
+}
+
+.pinkword {
+  text-decoration: line-through;
+  color: pink;
+}
+
+.yellowword {
+  text-decoration: line-through;
+  color: yellow;
+}
+
+.purpleword {
+  text-decoration: line-through;
+  color: purple;
+}
+
+.brownword {
+  text-decoration: line-through;
+  color: brown;
+}
+
+.silverword {
+  text-decoration: line-through;
+  color: silver;
+}
+
+.first {
+  border-radius: 50%;
+  background: blue;
+}
+
+.hover {
+  border-radius: 50%;
+  background: lightblue;
+}
+
+.true {
+  background-color: yellow;
+  color: red;
+}
