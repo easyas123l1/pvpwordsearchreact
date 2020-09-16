@@ -1,5 +1,6 @@
 import React from "react";
 import puzzle from "../../styles/puzzle.module.scss";
+import PlayPuzzle from './PlayPuzzle';
 
 const GameRoomLobby = ({ room, leaveRoom }) => {
     return (
@@ -16,6 +17,7 @@ const GameRoomLobby = ({ room, leaveRoom }) => {
                 <p>puzzle number of words {room.puzzle.numberOfWords}</p>
                 <p>puzzle timer {room.puzzle.timer}</p>
                 <p>puzzle code {room.puzzle.puzzle ? "true" : "false"}</p>
+                <PlayPuzzle words={room.puzzle.wordsDir} name={room.name} code={room.puzzle.puzzle} />
                 <button onClick={leaveRoom}>Leave</button>
             </div>
         </div>
