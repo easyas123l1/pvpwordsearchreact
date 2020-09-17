@@ -3,7 +3,6 @@ import { v4 as uuid } from "uuid";
 import puzzle from "../../styles/puzzle.module.scss";
 import classnames from "classnames";
 import "./WordSearch.css";
-import Footer from "../Footer/Footer";
 
 const PlayPuzzle = ({
   words,
@@ -373,18 +372,10 @@ const PlayPuzzle = ({
     setShowWords(!showWords);
   };
 
-  const printPuzzle = (e) => {
-    e.preventDefault();
-    // history.push("/printPuzzle");
-  };
-
   return (
     <div className={puzzle.spacer}>
       <div className={puzzle.background}>
         <div className={puzzle.puzzle}>
-          <button onClick={printPuzzle} className={puzzle.printPuzzleButton}>
-            Print Puzzle
-          </button>
           <h1>{name}</h1>
           <button onClick={toggleWords} className={puzzle.findWordButton}>
             {showWords ? "Hide" : "Show"} words to find
@@ -429,7 +420,6 @@ const PlayPuzzle = ({
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 };
