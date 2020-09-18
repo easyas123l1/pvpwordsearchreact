@@ -163,8 +163,8 @@ const PlayPuzzle = ({
         solvedWord = word;
       }
     }
-    // call redux update words
-    // updatePuzzle(newWords);
+    // update the puzzle here.
+    
     // in order to get both these function to work we will need to edit the original words object.
     // we will add a couple more properties on the back end called solved
     return solvedWord;
