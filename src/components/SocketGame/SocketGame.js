@@ -112,7 +112,13 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                     return <GameRoomLobbyStarting />;
                 } else if (room.state === "START") {
                     // game has started!
-                    return <GameRoomLobby room={room} leaveRoom={leaveRoom} />;
+                    return (
+                        <GameRoomLobby
+                            room={room}
+                            leaveRoom={leaveRoom}
+                            serverId={serverId}
+                        />
+                    );
                 } else {
                     // default case for state.
                     return (
