@@ -5,6 +5,7 @@ import PlayPuzzle from "./PlayPuzzle";
 const GameRoomLobby = ({ room, leaveRoom, serverId }) => {
     // mywords grabs a players words by filtering by id and destructuring first out of array.
     const [myWords] = room.players.filter((player) => serverId === player.id);
+    console.log(myWords.wordsDir);
     if (myWords) {
         return (
             <div className={puzzle.spacer}>
@@ -13,6 +14,7 @@ const GameRoomLobby = ({ room, leaveRoom, serverId }) => {
                         words={myWords.wordsDir}
                         name={room.name}
                         code={room.puzzle.puzzle}
+                        myLines={myWords.lines}
                     />
                     <button onClick={leaveRoom}>Leave</button>
                 </div>
