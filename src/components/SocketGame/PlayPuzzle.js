@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
 import puzzle from "../../styles/puzzle.module.scss";
 import classnames from "classnames";
 import "./WordSearch.css";
 
-const PlayPuzzle = ({ words, name, code }) => {
-    const [lines, setLines] = useState([]);
+const PlayPuzzle = ({ words, name, code, myLines }) => {
+    const [lines, setLines] = useState(myLines);
     const [answers, setAnswers] = useState([]);
     const [size, setSize] = useState(0);
     const [firstClickLocation, setFirstClickLocation] = useState("");
     const [time, setTime] = useState(0);
     const [active, setActive] = useState(false);
     const [showWords, setShowWords] = useState(true);
+    console.log(words);
     useEffect(() => {
         setSize(Math.sqrt(code.length));
-        buildLines();
         buildAnswers();
         setActive(true);
     }, [code]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -27,37 +26,6 @@ const PlayPuzzle = ({ words, name, code }) => {
             }, 1000);
         }
     });
-
-    const buildLines = () => {
-        let charPosition = 0;
-        const newLines = [];
-        let size = Math.sqrt(code.length);
-        for (let i = 0; size > i; i++) {
-            const line = [];
-            for (let j = 0; size > j; j++) {
-                let letterid = `${i}, ${j}`;
-                let letter = code.charAt(charPosition);
-                charPosition++;
-                const newLetter = {
-                    text: letter,
-                    id: letterid,
-                    circle: "",
-                    first: "",
-                    color: "",
-                    hover: "",
-                };
-                line.push(newLetter);
-                if (j + 1 === size) {
-                    const newLine = {
-                        text: line,
-                        id: uuid(),
-                    };
-                    newLines.push(newLine);
-                }
-            }
-        }
-        setLines(newLines);
-    };
 
     const goUp = (position) => {
         let seperate = position.replace(",", "").split(" ");
@@ -230,7 +198,12 @@ const PlayPuzzle = ({ words, name, code }) => {
                             "brown",
                             "silver",
                         ];
-                        let solvedWord = "";
+                        let solvedWord = handleColorChange(
+                            colors[randomColor],
+                            word
+                        );
+                        // call server here
+                        console.log(solvedWord);
                         for (
                             let wordLength = 0;
                             wordLength < word.length;
@@ -247,10 +220,6 @@ const PlayPuzzle = ({ words, name, code }) => {
                                         //set random color for circle and word found
                                         line.text[i].color =
                                             colors[randomColor];
-                                        solvedWord = handleColorChange(
-                                            colors[randomColor],
-                                            word
-                                        );
                                     }
                                 }
                             }
