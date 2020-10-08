@@ -3,15 +3,15 @@ import puzzle from "../../styles/puzzle.module.scss";
 import classnames from "classnames";
 import "./WordSearch.css";
 
-const PlayPuzzle = ({ words, name, code, myLines }) => {
+const PlayPuzzle = ({ myWords, name, code, myLines }) => {
     const [lines, setLines] = useState(myLines);
+    const [words, setWords] = useState(myWords);
     const [answers, setAnswers] = useState([]);
     const [size, setSize] = useState(0);
     const [firstClickLocation, setFirstClickLocation] = useState("");
     const [time, setTime] = useState(0);
     const [active, setActive] = useState(false);
     const [showWords, setShowWords] = useState(true);
-    console.log(words);
     useEffect(() => {
         setSize(Math.sqrt(code.length));
         buildAnswers();
@@ -204,6 +204,14 @@ const PlayPuzzle = ({ words, name, code, myLines }) => {
                         );
                         // call server here
                         console.log(solvedWord);
+                        let newWords = JSON.parse(JSON.stringify(words));
+                        for (let word of newWords) {
+                            if (solvedWord.word === word.word) {
+                                word.solved = true;
+                                word.color = colors[randomColor] + "word";
+                            }
+                        }
+                        setWords(newWords);
                         for (
                             let wordLength = 0;
                             wordLength < word.length;
