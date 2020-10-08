@@ -11,7 +11,7 @@ const GameRoomLobby = ({ room, leaveRoom, serverId }) => {
             <div className={puzzle.spacer}>
                 <div className={puzzle.background}>
                     <PlayPuzzle
-                        words={myWords.wordsDir}
+                        myWords={myWords.wordsDir}
                         name={room.name}
                         code={room.puzzle.puzzle}
                         myLines={myWords.lines}
