@@ -3,7 +3,7 @@ import puzzle from "../../styles/puzzle.module.scss";
 import classnames from "classnames";
 import "./WordSearch.css";
 
-const PlayPuzzle = ({ myWords, name, code, myLines }) => {
+const PlayPuzzle = ({ myWords, name, code, myLines, solveWord }) => {
     const [lines, setLines] = useState(myLines);
     const [words, setWords] = useState(myWords);
     const [answers, setAnswers] = useState([]);
@@ -202,7 +202,7 @@ const PlayPuzzle = ({ myWords, name, code, myLines }) => {
                             colors[randomColor],
                             word
                         );
-                        // call server here
+                        solveWord(solvedWord);
                         console.log(solvedWord);
                         let newWords = JSON.parse(JSON.stringify(words));
                         for (let word of newWords) {
