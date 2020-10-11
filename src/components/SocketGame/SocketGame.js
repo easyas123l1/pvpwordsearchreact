@@ -80,6 +80,10 @@ const SocketGame = ({ email, conn, error, serverId }) => {
         setRoom(initState);
     };
 
+    const solveWord = (word) => {
+        socket.emit("solveWord", word);
+    };
+
     // change game room name
     const changeName = (e) => {
         setCreateName(e.target.value);
@@ -117,6 +121,7 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                             room={room}
                             leaveRoom={leaveRoom}
                             serverId={serverId}
+                            solveWord={solveWord}
                         />
                     );
                 } else {
