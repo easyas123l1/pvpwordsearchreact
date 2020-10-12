@@ -202,8 +202,6 @@ const PlayPuzzle = ({ myWords, name, code, myLines, solveWord }) => {
                             colors[randomColor],
                             word
                         );
-                        solveWord(solvedWord);
-                        console.log(solvedWord);
                         let newWords = JSON.parse(JSON.stringify(words));
                         for (let word of newWords) {
                             if (solvedWord.word === word.word) {
@@ -232,6 +230,7 @@ const PlayPuzzle = ({ myWords, name, code, myLines, solveWord }) => {
                                 }
                             }
                         }
+                        solveWord(solvedWord, lines);
                         //test if all words are solved then puzzle is solved.  VICTORY!!!
                         let checkComplete = true;
                         for (let index of words) {
