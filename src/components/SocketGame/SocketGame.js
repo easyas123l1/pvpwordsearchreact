@@ -4,6 +4,7 @@ import PreGameRoomLobby from "./PreGameRoomLobby";
 import MainScreenFindCreateGame from "./MainScreenFindCreateGame";
 import GameRoomLobby from "./GameRoomLobby";
 import GameRoomLobbyStarting from "./GameRoomLobbyStarting";
+import GameRoomLobbyGameOver from "./GameRoomLobbyGameOver";
 import { socket } from "../../App";
 
 const initState = {
@@ -43,13 +44,6 @@ const SocketGame = ({ email, conn, error, serverId }) => {
         setRoom(initState);
     });
 
-    // host started game.
-    socket.on("gameStarting", () => {
-        const gameRoom = room;
-        gameRoom.state = "STARTING";
-        setRoom(gameRoom);
-    });
-
     // create game room
     const createGame = (e) => {
         const roomInfo = {
@@ -80,6 +74,7 @@ const SocketGame = ({ email, conn, error, serverId }) => {
         setRoom(initState);
     };
 
+    // solve word in game room
     const solveWord = (word, lines) => {
         socket.emit("solveWord", word, lines);
     };
@@ -122,6 +117,14 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                             leaveRoom={leaveRoom}
                             serverId={serverId}
                             solveWord={solveWord}
+                        />
+                    );
+                } else if (room.state === "GAMEOVER") {
+                    return (
+                        <GameRoomLobbyGameOver
+                            room={room}
+                            leaveRoom={leaveRoom}
+                            serverId={serverId}
                         />
                     );
                 } else {
