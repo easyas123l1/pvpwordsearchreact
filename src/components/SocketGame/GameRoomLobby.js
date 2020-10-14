@@ -2,7 +2,7 @@ import React from "react";
 import puzzle from "../../styles/puzzle.module.scss";
 import PlayPuzzle from "./PlayPuzzle";
 
-const GameRoomLobby = ({ room, leaveRoom, serverId, solveWord }) => {
+const GameRoomLobby = ({ room, leaveRoom, serverId, solveWord, endGame }) => {
     // mywords grabs a players words by filtering by id and destructuring first out of array.
     const [myWords] = room.players.filter((player) => serverId === player.id);
     if (myWords) {
@@ -15,6 +15,8 @@ const GameRoomLobby = ({ room, leaveRoom, serverId, solveWord }) => {
                         code={room.puzzle.puzzle}
                         myLines={myWords.lines}
                         solveWord={solveWord}
+                        timer={room.puzzle.timer}
+                        endGame={endGame}
                     />
                     <button onClick={leaveRoom}>Leave</button>
                 </div>
