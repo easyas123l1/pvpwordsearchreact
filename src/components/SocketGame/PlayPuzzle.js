@@ -3,13 +3,21 @@ import puzzle from "../../styles/puzzle.module.scss";
 import classnames from "classnames";
 import "./WordSearch.css";
 
-const PlayPuzzle = ({ myWords, name, code, myLines, solveWord }) => {
+const PlayPuzzle = ({
+    myWords,
+    name,
+    code,
+    myLines,
+    solveWord,
+    timer,
+    endGame,
+}) => {
     const [lines, setLines] = useState(myLines);
     const [words, setWords] = useState(myWords);
     const [answers, setAnswers] = useState([]);
     const [size, setSize] = useState(0);
     const [firstClickLocation, setFirstClickLocation] = useState("");
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState(timer);
     const [active, setActive] = useState(false);
     const [showWords, setShowWords] = useState(true);
     useEffect(() => {
@@ -21,9 +29,13 @@ const PlayPuzzle = ({ myWords, name, code, myLines, solveWord }) => {
     useEffect(() => {
         let interval = null; // eslint-disable-line no-unused-vars
         if (active) {
-            interval = setTimeout(() => {
-                setTime(time + 1);
-            }, 1000);
+            if (time > 0) {
+                interval = setTimeout(() => {
+                    setTime(time - 1);
+                }, 1000);
+            } else {
+                endGame();
+            }
         }
     });
 
