@@ -50,7 +50,7 @@ const SocketGame = ({ email, conn, error, serverId }) => {
             name: createName,
             size: 30,
             numberOfWords: 13,
-            timer: 300,
+            timer: 30,
             minimumWordSize: 2,
             maximumWordSize: 10,
         };
@@ -82,6 +82,11 @@ const SocketGame = ({ email, conn, error, serverId }) => {
     // change game room name
     const changeName = (e) => {
         setCreateName(e.target.value);
+    };
+
+    // gets triggered when game timer runs out or user solves puzzles
+    const endGame = () => {
+        setRoom({ ...room, state: "GAMEOVER" });
     };
     // error means already logged into account
     if (error) {
@@ -117,9 +122,11 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                             leaveRoom={leaveRoom}
                             serverId={serverId}
                             solveWord={solveWord}
+                            endGame={endGame}
                         />
                     );
                 } else if (room.state === "GAMEOVER") {
+                    // game has ended!
                     return (
                         <GameRoomLobbyGameOver
                             room={room}
