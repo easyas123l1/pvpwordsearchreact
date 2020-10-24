@@ -20,7 +20,7 @@ const MainScreenFindCreateGame = ({
                         onChange={changeName}
                         placeholder="Title the game room!"
                         value={createName}
-                        // className={puzzle.space}
+                        className={puzzle.puzzleParagraph}
                     />
                     <button onClick={createGame}>Create Game</button>
                 </div>
