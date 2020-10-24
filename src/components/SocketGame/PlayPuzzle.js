@@ -375,7 +375,7 @@ const PlayPuzzle = ({
     return (
         <div className={puzzle.background}>
             <div className={puzzle.puzzle}>
-                <h1>{name}</h1>
+                <h1 className={puzzle.puzzleParagraph}>{name}</h1>
                 <button onClick={toggleWords} className={puzzle.findWordButton}>
                     {showWords ? "Hide" : "Show"} words to find
                 </button>
@@ -396,7 +396,8 @@ const PlayPuzzle = ({
                                         letter.hover,
                                         letter.first,
                                         letter.circle,
-                                        letter.color
+                                        letter.color,
+                                        puzzle.puzzleParagraph
                                     )}
                                 >
                                     {letter.text}
