@@ -1,454 +1,458 @@
 .findWordRow {
-  display: inline-block;
-  min-width: 35px;
-  user-select: none;
+    display: inline-block;
+    min-width: 35px;
+    user-select: none;
+}
+
+.puzzleParagraph {
+    color: black;
 }
 
 .wordsToFind {
-  background-color: rgba(255, 255, 255, 0.411);
-  position: fixed;
-  top: 100%;
-  right: 0;
-  top: 25%;
-  text-align: center;
-  width: max-content;
-  text-decoration: none;
-  font-weight: 900;
+    background-color: rgba(255, 255, 255, 0.411);
+    position: fixed;
+    top: 100%;
+    right: 0;
+    top: 25%;
+    text-align: center;
+    width: max-content;
+    text-decoration: none;
+    font-weight: 900;
 }
 
 .dropdown {
-  position: fixed;
-  transform: translateX(-25px);
-  background-color: white;
-  min-width: 100px;
-  display: flex;
-  justify-content: center;
+    position: fixed;
+    transform: translateX(-25px);
+    background-color: white;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
 }
 
 .wordsToFind ul {
-  list-style: none;
+    list-style: none;
 }
 
 .printPuzzleButton {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  top: 0px;
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    top: 0px;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .editPuzzle {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  top: 0px;
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    top: 0px;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .savePuzzle {
-  position: absolute;
-  top: 100%;
-  right: 50%;
-  top: 0px;
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    top: 0px;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .generateNew {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  top: 0px;
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    top: 0px;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .playPuzzleButton {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  top: 0px;
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    top: 0px;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .findWordButton {
-  position: fixed;
-  top: 100%;
-  right: 0;
-  top: 64px;
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    position: fixed;
+    top: 100%;
+    right: 0;
+    top: 64px;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .hideWordButton {
-  background-color: #041e42;
-  color: white;
-  height: 2rem;
+    background-color: #041e42;
+    color: white;
+    height: 2rem;
 }
 
 .puzzle {
-  z-index: -1;
-  font-weight: 700;
-  line-height: 1.75;
-  color: black;
-  font-size: 2rem;
-  height: max-content;
-  width: max-content;
-  background-color: white;
-  margin-top: 50px;
+    z-index: -1;
+    font-weight: 700;
+    line-height: 1.75;
+    color: black;
+    font-size: 2rem;
+    height: max-content;
+    width: max-content;
+    background-color: white;
+    margin-top: 50px;
 }
 
 .puzzle ul {
-  justify-content: space-around;
-  display: inline-flex;
-  text-align: justify;
-  background-color: white;
+    justify-content: space-around;
+    display: inline-flex;
+    text-align: justify;
+    background-color: white;
 }
 
 .puzzle h1 {
-  font-weight: 700;
-  font-size: 2rem;
-  text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .navBar {
-  background-color: #041e42;
-  height: 64px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  text-decoration: none;
+    background-color: rgb(0 0 0);
+    height: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    text-decoration: none;
 }
 
 .background {
-  background-color: #a8d0e6;
-  z-index: -1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  min-height: calc(100vh - 96px);
-  height: max-content;
+    background-color: rgb(0 0 0);
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 96px);
+    height: max-content;
 }
 
 .spacer {
-  position: absolute;
-  top: 64px;
-  z-index: -1;
-  background-color: #a8d0e6;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 64px);
-  height: max-content;
-  min-width: 100%;
+    position: absolute;
+    top: 64px;
+    z-index: -1;
+    background-color: rgb(0 0 0);
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 64px);
+    height: max-content;
+    min-width: 100%;
 }
 
 .createPuzzle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  border: #041e42 solid 3px;
-  border-radius: 10px;
-  height: calc(100vh-96px);
-  width: 80vw;
-  overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: rgb(0 0 0) solid 3px;
+    border-radius: 10px;
+    height: calc(100vh-96px);
+    width: 80vw;
+    overflow-y: auto;
 }
 
 .addWord {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
 }
 
 .aTag {
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 a:hover {
-  color: #ffb81c;
+    color: #ffb81c;
 }
 
 .space {
-  margin: 2% 0;
-  width: 75%;
-  text-align: center;
-  font-size: 1.5rem;
+    margin: 2% 0;
+    width: 75%;
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 .createFindWords {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .createFindWords ul {
-  width: 50%;
-  text-align: center;
-  list-style-type: none;
+    width: 50%;
+    text-align: center;
+    list-style-type: none;
 }
 
 .createFindWords ul li {
-  margin: 1%;
+    margin: 1%;
 }
 
 .wordSearch {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 96px);
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 96px);
+    width: 100%;
 }
 
 .logout {
-  background-color: #041e42;
-  border: none;
-  color: white;
+    background-color: #041e42;
+    border: none;
+    color: white;
 }
 
 .logout:hover {
-  color: #ffb81c;
-  cursor: pointer;
+    color: #ffb81c;
+    cursor: pointer;
 }
 
 .image {
-  width: 100%;
-  height: 40vh;
+    width: 100%;
+    height: 40vh;
 }
 
 .imageURL {
-  height: 50px;
-  border-radius: 50%;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .login {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 75%;
-  min-height: 80%;
-  border-radius: 25px;
-  margin-top: 2%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 75%;
+    min-height: 80%;
+    border-radius: 25px;
+    margin-top: 2%;
 }
 
 .username {
-  text-align: center;
-  width: 80%;
-  margin: 3% auto;
-  line-height: 2.6;
+    text-align: center;
+    width: 80%;
+    margin: 3% auto;
+    line-height: 2.6;
 }
 
 .loginButton {
-  width: 80%;
-  margin: 3% auto;
-  height: 60px;
-  background-color: #041e42;
-  color: white;
-  border-radius: 25px;
+    width: 80%;
+    margin: 3% auto;
+    height: 60px;
+    background-color: #041e42;
+    color: white;
+    border-radius: 25px;
 }
 
 .loginText {
-  margin: 2% auto;
-  font-size: 2rem;
+    margin: 2% auto;
+    font-size: 2rem;
 }
 
 .puzzleCard {
-  background-color: white;
-  width: 48%;
-  margin: 1%;
-  border-radius: 25px;
-  flex-wrap: wrap;
-  height: max-content;
+    background-color: white;
+    width: 48%;
+    margin: 1%;
+    border-radius: 25px;
+    flex-wrap: wrap;
+    height: max-content;
 }
 
 .playPuzzle {
-  width: 80%;
-  margin: 1%;
-  height: 60px;
-  background-color: #041e42;
-  color: white;
-  border-radius: 25px;
+    width: 80%;
+    margin: 1%;
+    height: 60px;
+    background-color: #041e42;
+    color: white;
+    border-radius: 25px;
 }
 
 .allPuzzle {
-  background-color: #a8d0e6;
-  height: calc(100vh - 96px);
-  overflow: auto;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+    background-color: #a8d0e6;
+    height: calc(100vh - 96px);
+    overflow: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .puzzleHeader {
-  margin: 1% auto;
-  text-align: center;
-  font-size: 2rem;
+    margin: 1% auto;
+    text-align: center;
+    font-size: 2rem;
 }
 
 .buttonDiv {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1%;
 }
 
 .cardP {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 .cardDescription {
-  font-size: 1.75rem;
+    font-size: 1.75rem;
 }
 
 .generateButton {
-  width: 80%;
-  margin: 3% auto;
-  height: 60px;
-  background-color: #041e42;
-  color: white;
-  border-radius: 25px;
+    width: 80%;
+    margin: 3% auto;
+    height: 60px;
+    background-color: #041e42;
+    color: white;
+    border-radius: 25px;
 }
 
 .removeButton {
-  width: 80%;
-  margin: 3% auto;
-  height: 60px;
-  background-color: #041e42;
-  color: white;
-  border-radius: 25px;
+    width: 80%;
+    margin: 3% auto;
+    height: 60px;
+    background-color: #041e42;
+    color: white;
+    border-radius: 25px;
 }
 
 .buttonsDiv {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .backgroundWorld {
-  z-index: -1;
-  background-color: #a8d0e6;
-  height: max-content;
-  width: max-content;
+    z-index: -1;
+    background-color: #a8d0e6;
+    height: max-content;
+    width: max-content;
 }
 
 .backgroundWorldWords {
-  z-index: -1;
-  background-color: #a8d0e6;
-  height: max-content;
-  width: 100%;
+    z-index: -1;
+    background-color: #a8d0e6;
+    height: max-content;
+    width: 100%;
 }
 
 .worldRecord {
-  display: inline-block;
-  min-width: 35px;
-  user-select: none;
+    display: inline-block;
+    min-width: 35px;
+    user-select: none;
 }
 
 .worldRecordWords {
-  display: inline-block;
-  min-width: 35px;
-  margin: 0.5%;
+    display: inline-block;
+    min-width: 35px;
+    margin: 0.5%;
 }
 
 .worldWords {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .footer {
-  background-color: #041e42;
-  height: 32px;
-  min-width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
+    background-color: #041e42;
+    height: 32px;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
 
-  a:link {
-    color: #a2aaad;
-  }
+    a:link {
+        color: #a2aaad;
+    }
 
-  a:hover {
-    color: #ffb81c;
-  }
+    a:hover {
+        color: #ffb81c;
+    }
 }
 
 .landingPage {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: calc(60vh - 96px);
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(60vh - 96px);
 }
 
 .features {
-  background-color: white;
-  width: 33.33%;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+    background-color: white;
+    width: 33.33%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .featureDescription {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .printPuzzle {
-  position: absolute;
-  background-color: white;
-  z-index: 5;
-  width: 100%;
-  min-height: 100vh;
-  height: max-content;
+    position: absolute;
+    background-color: white;
+    z-index: 5;
+    width: 100%;
+    min-height: 100vh;
+    height: max-content;
 }
 
 .printWordsToFind {
-  text-align: center;
-  width: 100%;
-  text-decoration: none;
-  font-weight: 900;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    font-weight: 900;
 }
 
 .printWordsToFindUl {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .printWordsToFindUl ul {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: wrap;
-  list-style: none;
-  width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 100%;
 }
 
 .printWordsToFindUl li {
-  width: 20%;
+    width: 20%;
 }
