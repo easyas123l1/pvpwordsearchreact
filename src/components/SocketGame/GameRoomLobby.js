@@ -1,6 +1,7 @@
 import React from "react";
 import puzzle from "../../styles/puzzle.module.scss";
 import PlayPuzzle from "./PlayPuzzle";
+import LeaderBoard from "./LeaderBoard";
 
 const GameRoomLobby = ({ room, leaveRoom, serverId, solveWord, endGame }) => {
     // mywords grabs a players words by filtering by id and destructuring first out of array.
@@ -9,6 +10,7 @@ const GameRoomLobby = ({ room, leaveRoom, serverId, solveWord, endGame }) => {
         return (
             <div className={puzzle.spacer}>
                 <div className={puzzle.background}>
+                    <LeaderBoard players={room.players} serverId={serverId} />
                     <PlayPuzzle
                         myWords={myWords.wordsDir}
                         name={room.name}
