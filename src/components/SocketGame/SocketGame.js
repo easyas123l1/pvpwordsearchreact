@@ -24,8 +24,17 @@ const initState = {
     },
 };
 
+const initStateCreateGame = {
+    name: "",
+    size: 30,
+    numberOfWords: 15,
+    timer: 300,
+    minimumWordSize: 2,
+    maximumWordSize: 10,
+};
+
 const SocketGame = ({ email, conn, error, serverId }) => {
-    const [createName, setCreateName] = useState("");
+    const [createGameObj, setCreateGameObj] = useState(initStateCreateGame);
     const [rooms, setRooms] = useState([]);
     const [room, setRoom] = useState(initState);
 
@@ -45,16 +54,9 @@ const SocketGame = ({ email, conn, error, serverId }) => {
     });
 
     // create game room
-    const createGame = (e) => {
-        const roomInfo = {
-            name: createName,
-            size: 30,
-            numberOfWords: 13,
-            timer: 30,
-            minimumWordSize: 2,
-            maximumWordSize: 10,
-        };
-        socket.emit("createRoom", roomInfo);
+    const createGame = () => {
+        socket.emit("createRoom", createGameObj);
+        setCreateGameObj(initStateCreateGame);
     };
 
     // join game room
@@ -80,11 +82,11 @@ const SocketGame = ({ email, conn, error, serverId }) => {
     };
 
     // change game room name
-    const changeName = (e) => {
-        setCreateName(e.target.value);
+    const changeGameObj = (e) => {
+        setCreateGameObj({ ...createGameObj, [e.target.name]: e.target.value });
     };
 
-    // gets triggered when game timer runs out or user solves puzzles
+    // triggered when game timer runs out or user solves puzzles
     const endGame = () => {
         setRoom({ ...room, state: "GAMEOVER" });
     };
@@ -149,8 +151,8 @@ const SocketGame = ({ email, conn, error, serverId }) => {
                 //not in a game room
                 return (
                     <MainScreenFindCreateGame
-                        changeName={changeName}
-                        createName={createName}
+                        changeGameObj={changeGameObj}
+                        createGameObj={createGameObj}
                         createGame={createGame}
                         rooms={rooms}
                         joinGame={joinGame}
