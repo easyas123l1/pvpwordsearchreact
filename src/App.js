@@ -13,18 +13,20 @@ import { loginUser } from "./store/actions/userAction";
 import LandingPage from "./components/Landing/LandingPage";
 import PrintPuzzle from "./components/Puzzle/PrintPuzzle";
 import SocketGame from "./components/SocketGame/SocketGame";
+import axios from "axios";
 
 export const socket = io("http://localhost:4999");
 
 function App({ loginUser, loggedInStatus }) {
+    const [name, setName] = useState("");
     const [mail, setMail] = useState(""); // this needs to be changed to "" for online | "anything" inside for offline
     const [conn, setConn] = useState(false);
     const [error, setError] = useState("");
     const [serverId, setServerId] = useState(null);
 
     socket.on("getUserInfo", () => {
-        if (mail) {
-            socket.emit("userInfo", mail);
+        if (mail && name) {
+            socket.emit("userInfo", mail, name);
         }
     });
 
@@ -59,6 +61,22 @@ function App({ loginUser, loggedInStatus }) {
             email = getprofile.getEmail();
             imageUrl = getprofile.getImageUrl();
             id = getprofile.getId();
+            setMail(email);
+            axios
+                .post("http://localhost:4999/puzzle/user", { email })
+                .then((res) => {
+                    console.log(res);
+                    if (res.status === 201) {
+                        // set app in create name state
+                    } else if (res.status === 200) {
+                        setName(res.data.name);
+                        socket.emit("userInfo", email, res.data.name);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setServerId(null);
+                });
         }
         const user = {
             email,
@@ -67,12 +85,6 @@ function App({ loginUser, loggedInStatus }) {
             isSignedIn,
         };
         loginUser(user);
-        if (email) {
-            socket.emit("userInfo", email);
-            setMail(email);
-        } else {
-            setServerId(null);
-        }
     };
 
     const initializeGoogleSignIn = () => {
