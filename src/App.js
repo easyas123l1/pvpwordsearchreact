@@ -13,6 +13,7 @@ import { loginUser } from "./store/actions/userAction";
 import LandingPage from "./components/Landing/LandingPage";
 import PrintPuzzle from "./components/Puzzle/PrintPuzzle";
 import SocketGame from "./components/SocketGame/SocketGame";
+import FirstLogin from "./components/FirstLogin/FirstLogin";
 import axios from "axios";
 
 export const socket = io("http://localhost:4999");
@@ -23,6 +24,7 @@ function App({ loginUser, loggedInStatus }) {
     const [conn, setConn] = useState(false);
     const [error, setError] = useState("");
     const [serverId, setServerId] = useState(null);
+    const [firstLogin, setFirstLogin] = useState(false);
 
     socket.on("getUserInfo", () => {
         if (mail && name) {
@@ -68,8 +70,10 @@ function App({ loginUser, loggedInStatus }) {
                     console.log(res);
                     if (res.status === 201) {
                         // set app in create name state
+                        setFirstLogin(true);
                     } else if (res.status === 200) {
                         setName(res.data.name);
+                        setFirstLogin(false);
                         socket.emit("userInfo", email, res.data.name);
                     }
                 })
@@ -85,6 +89,22 @@ function App({ loginUser, loggedInStatus }) {
             isSignedIn,
         };
         loginUser(user);
+    };
+
+    const createName = (newName) => {
+        if (firstLogin) {
+            axios
+                .put("http://localhost:4999/puzzle/user", {
+                    email: mail,
+                    name: newName,
+                })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
     const initializeGoogleSignIn = () => {
@@ -122,34 +142,42 @@ function App({ loginUser, loggedInStatus }) {
         insertGapiScript();
     });
 
-    return (
-        <>
-            <NavBar />
-            <Switch>
-                <Route path="/home" component={LandingPage} />
-                <Route path="/allPuzzles" component={AllPuzzles} />
-                <Route path="/playPuzzle" component={PlayPuzzle} />
-                <Route path="/completePuzzle" component={Victory} />
-                <Route path="/printPuzzle" component={PrintPuzzle} />
-                <Route path="/createPuzzle" component={CreatePuzzle} />
-                <Route path="/addPuzzle" component={AddPuzzle} />
-                <Route
-                    path="/socketGame"
-                    render={(props) => (
-                        <SocketGame
-                            {...props}
-                            email={mail}
-                            conn={conn}
-                            error={error}
-                            serverId={serverId}
-                        />
-                    )}
-                />
-                <Route component={LandingPage} />
-                {/* default route incase route doesn't exist */}
-            </Switch>
-        </>
-    );
+    if (firstLogin) {
+        return (
+            <>
+                <FirstLogin createName={createName} />
+            </>
+        );
+    } else {
+        return (
+            <>
+                <NavBar />
+                <Switch>
+                    <Route path="/home" component={LandingPage} />
+                    <Route path="/allPuzzles" component={AllPuzzles} />
+                    <Route path="/playPuzzle" component={PlayPuzzle} />
+                    <Route path="/completePuzzle" component={Victory} />
+                    <Route path="/printPuzzle" component={PrintPuzzle} />
+                    <Route path="/createPuzzle" component={CreatePuzzle} />
+                    <Route path="/addPuzzle" component={AddPuzzle} />
+                    <Route
+                        path="/socketGame"
+                        render={(props) => (
+                            <SocketGame
+                                {...props}
+                                email={mail}
+                                conn={conn}
+                                error={error}
+                                serverId={serverId}
+                            />
+                        )}
+                    />
+                    <Route component={LandingPage} />
+                    {/* default route incase route doesn't exist */}
+                </Switch>
+            </>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
