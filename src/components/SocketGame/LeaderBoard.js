@@ -8,12 +8,12 @@ export default function LeaderBoard({ players, serverId }) {
         <div>
             {playerPlacements.map((player) => {
                 return player.id !== serverId ? (
-                    <p>
-                        {player.id}: {player.score}
+                    <p key={player.name}>
+                        {player.name}: {player.score}
                     </p>
                 ) : (
-                    <p>
-                        {player.id}(you): {player.score}
+                    <p key={player.name}>
+                        {player.name}(you): {player.score}
                     </p>
                 );
             })}
