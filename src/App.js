@@ -67,7 +67,6 @@ function App({ loginUser, loggedInStatus }) {
             axios
                 .post("http://localhost:4999/puzzle/user", { email })
                 .then((res) => {
-                    console.log(res);
                     if (res.status === 201) {
                         // set app in create name state
                         setFirstLogin(true);
@@ -99,9 +98,11 @@ function App({ loginUser, loggedInStatus }) {
                     name: newName,
                 })
                 .then((res) => {
-                    console.log(res);
+                    setFirstLogin(false);
+                    setName(res.data.name);
                 })
                 .catch((err) => {
+                    setFirstLogin(true);
                     console.log(err);
                 });
         }
