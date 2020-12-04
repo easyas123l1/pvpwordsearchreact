@@ -61,6 +61,7 @@ const SocketGame = ({ email, conn, error, serverId }) => {
 
     // join game room
     const joinGame = (e) => {
+        setCreateGameObj(initStateCreateGame);
         const roomid = e.target.id;
         socket.emit("joinRoom", roomid);
     };
