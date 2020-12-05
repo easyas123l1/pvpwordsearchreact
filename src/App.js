@@ -16,7 +16,9 @@ import SocketGame from "./components/SocketGame/SocketGame";
 import FirstLogin from "./components/FirstLogin/FirstLogin";
 import axios from "axios";
 
-export const socket = io("http://localhost:4999");
+export const socket = io(
+    "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/"
+);
 
 function App({ loginUser, loggedInStatus }) {
     const [name, setName] = useState("");
@@ -65,7 +67,10 @@ function App({ loginUser, loggedInStatus }) {
             id = getprofile.getId();
             setMail(email);
             axios
-                .post("http://localhost:4999/puzzle/user", { email })
+                .post(
+                    "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
+                    { email }
+                )
                 .then((res) => {
                     if (res.status === 201) {
                         // set app in create name state
@@ -93,10 +98,13 @@ function App({ loginUser, loggedInStatus }) {
     const createName = (newName) => {
         if (firstLogin) {
             axios
-                .put("http://localhost:4999/puzzle/user", {
-                    email: mail,
-                    name: newName,
-                })
+                .put(
+                    "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
+                    {
+                        email: mail,
+                        name: newName,
+                    }
+                )
                 .then((res) => {
                     setFirstLogin(false);
                     setName(res.data.name);
