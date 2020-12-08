@@ -4,16 +4,11 @@ import { connect } from "react-redux";
 import io from "socket.io-client";
 import "./styles/global.scss";
 import NavBar from "./components/NavBar/NavBar";
-import AddPuzzle from "./components/Puzzle/AddPuzzle";
-import CreatePuzzle from "./components/Puzzle/CreatePuzzle";
-import AllPuzzles from "./components/Puzzle/AllPuzzles";
-import PlayPuzzle from "./components/Puzzle/PlayPuzzle";
-import Victory from "./components/Puzzle/Victory";
 import { loginUser } from "./store/actions/userAction";
 import LandingPage from "./components/Landing/LandingPage";
-import PrintPuzzle from "./components/Puzzle/PrintPuzzle";
 import SocketGame from "./components/SocketGame/SocketGame";
 import FirstLogin from "./components/FirstLogin/FirstLogin";
+import Profile from "./components/Profile/Profile";
 import axios from "axios";
 
 export const socket = io(
@@ -65,7 +60,6 @@ function App({ loginUser, loggedInStatus }) {
             email = getprofile.getEmail();
             imageUrl = getprofile.getImageUrl();
             id = getprofile.getId();
-            setMail(email);
             axios
                 .post(
                     "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
@@ -86,6 +80,7 @@ function App({ loginUser, loggedInStatus }) {
                     setServerId(null);
                 });
         }
+        setMail(email);
         const user = {
             email,
             imageUrl,
@@ -163,24 +158,28 @@ function App({ loginUser, loggedInStatus }) {
                 <NavBar />
                 <Switch>
                     <Route path="/home" component={LandingPage} />
-                    <Route path="/allPuzzles" component={AllPuzzles} />
-                    <Route path="/playPuzzle" component={PlayPuzzle} />
-                    <Route path="/completePuzzle" component={Victory} />
-                    <Route path="/printPuzzle" component={PrintPuzzle} />
-                    <Route path="/createPuzzle" component={CreatePuzzle} />
-                    <Route path="/addPuzzle" component={AddPuzzle} />
-                    <Route
-                        path="/socketGame"
-                        render={(props) => (
-                            <SocketGame
-                                {...props}
-                                email={mail}
-                                conn={conn}
-                                error={error}
-                                serverId={serverId}
-                            />
-                        )}
-                    />
+                    {mail && (
+                        <Route
+                            path="/profile"
+                            render={(props) => (
+                                <Profile {...props} email={mail} />
+                            )}
+                        />
+                    )}
+                    {mail && (
+                        <Route
+                            path="/socketGame"
+                            render={(props) => (
+                                <SocketGame
+                                    {...props}
+                                    email={mail}
+                                    conn={conn}
+                                    error={error}
+                                    serverId={serverId}
+                                />
+                            )}
+                        />
+                    )}
                     <Route component={LandingPage} />
                     {/* default route incase route doesn't exist */}
                 </Switch>
