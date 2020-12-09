@@ -49,6 +49,7 @@ const NavBar = ({ loggedIn, imageUrl }) => {
                         {dropdown && (
                             <div className={puzzle.dropdown}>
                                 <Link to="/profile">Profile</Link>
+                                <Link to="/matchHistory">Match History</Link>
                                 <button onClick={(e) => logout(e)}>
                                     logout
                                 </button>
