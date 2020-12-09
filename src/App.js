@@ -9,6 +9,7 @@ import LandingPage from "./components/Landing/LandingPage";
 import SocketGame from "./components/SocketGame/SocketGame";
 import FirstLogin from "./components/FirstLogin/FirstLogin";
 import Profile from "./components/Profile/Profile";
+import MatchHistory from "./components/MatchHistory/MatchHistory";
 import axios from "axios";
 
 export const socket = io(
@@ -162,7 +163,7 @@ function App({ loginUser, loggedInStatus }) {
                         <Route
                             path="/profile"
                             render={(props) => (
-                                <Profile {...props} email={mail} />
+                                <Profile {...props} email={mail} name={name} />
                             )}
                         />
                     )}
@@ -177,6 +178,14 @@ function App({ loginUser, loggedInStatus }) {
                                     error={error}
                                     serverId={serverId}
                                 />
+                            )}
+                        />
+                    )}
+                    {mail && (
+                        <Route
+                            path="/matchHistory"
+                            render={(props) => (
+                                <MatchHistory {...props} email={mail} />
                             )}
                         />
                     )}
