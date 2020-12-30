@@ -13,7 +13,8 @@ import MatchHistory from "./components/MatchHistory/MatchHistory";
 import axios from "axios";
 
 export const socket = io(
-    "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/"
+    // "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/"
+    "http://localhost:4999/"
 );
 
 function App({ loginUser, loggedInStatus }) {
@@ -63,7 +64,8 @@ function App({ loginUser, loggedInStatus }) {
             id = getprofile.getId();
             axios
                 .post(
-                    "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
+                    // "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
+                    "http://localhost:4999/puzzle/user",
                     { email }
                 )
                 .then((res) => {
@@ -95,7 +97,8 @@ function App({ loginUser, loggedInStatus }) {
         if (firstLogin) {
             axios
                 .put(
-                    "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
+                    // "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user",
+                    "http://localhost:4999/puzzle/user",
                     {
                         email: mail,
                         name: newName,
