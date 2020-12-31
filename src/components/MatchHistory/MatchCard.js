@@ -1,6 +1,9 @@
 import React from "react";
 
 export default function MatchCard({ puzzle, viewPuzzle }) {
+    const handleClick = () => {
+        viewPuzzle(puzzle);
+    };
     return (
         <div>
             <p>id: {puzzle.id}</p>
@@ -23,7 +26,7 @@ export default function MatchCard({ puzzle, viewPuzzle }) {
                 return <p key={word.id}>{word.word}</p>;
             })}
             <p>puzzle: puzzle.code lol</p>
-            <button onClick={() => viewPuzzle(puzzle)}>Click</button>
+            <button onClick={handleClick}>Click</button>
         </div>
     );
 }
