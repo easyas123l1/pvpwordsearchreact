@@ -1,11 +1,17 @@
 import React from "react";
+import Puzzle from "./Puzzle";
 
-export default function PuzzleView({ puzzleView, leavePuzzle }) {
-    console.log(puzzleView);
+export default function PuzzleView({ puzzle, leavePuzzle }) {
+    console.log(puzzle);
     return (
         <div>
-            <p>the puzzzlllllleeee</p>
             <button onClick={leavePuzzle}>leave puzzle view</button>
+            <Puzzle
+                words={puzzle.words}
+                name={puzzle.name}
+                code={puzzle.code}
+                users={puzzle.users}
+            />
         </div>
     );
 }
