@@ -140,7 +140,7 @@ export default function Puzzle({ words, name, code, users }) {
             <div className={puzzle.puzzle}>
                 <h1>{name}</h1>
                 <button onClick={toggleWords} className={puzzle.findWordButton}>
-                    {showWords ? "Hide" : "Show"} words to find
+                    {showWords ? "Hide" : "Show"} words
                 </button>
                 <ul>
                     {lines.map((line) => (
@@ -170,7 +170,7 @@ export default function Puzzle({ words, name, code, users }) {
             </div>
             {showWords && (
                 <div className={puzzle.wordsToFind}>
-                    <h1>WORDS TO FIND:</h1>
+                    <h1>WORDS</h1>
                     <ul>
                         {words.map((word) => (
                             <li
@@ -190,6 +190,16 @@ export default function Puzzle({ words, name, code, users }) {
                     </button>
                 </div>
             )}
+            <div className={puzzle.users}>
+                <h1>Users</h1>
+                <ul>
+                    {users.map((user) => (
+                        <li id={user.games_users_id} key={user.games_users_id}>
+                            {user.name}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
     );
 }
