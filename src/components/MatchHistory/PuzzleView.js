@@ -2,7 +2,6 @@ import React from "react";
 import Puzzle from "./Puzzle";
 
 export default function PuzzleView({ puzzle, leavePuzzle }) {
-    console.log(puzzle);
     return (
         <div>
             <button onClick={leavePuzzle}>leave puzzle view</button>
@@ -11,6 +10,7 @@ export default function PuzzleView({ puzzle, leavePuzzle }) {
                 name={puzzle.name}
                 code={puzzle.code}
                 users={puzzle.users}
+                time={puzzle.time}
             />
         </div>
     );
