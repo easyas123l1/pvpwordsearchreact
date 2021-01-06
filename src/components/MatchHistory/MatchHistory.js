@@ -27,7 +27,6 @@ export default function MatchHistory({ email }) {
                 { email }
             )
             .then((res) => {
-                console.log(res);
                 setHistory(res.data);
             })
             .catch((err) => {
