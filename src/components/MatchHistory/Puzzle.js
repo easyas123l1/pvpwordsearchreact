@@ -3,14 +3,36 @@ import puzzle from "../../styles/puzzle.module.scss";
 import { v4 as uuid } from "uuid";
 import classnames from "classnames";
 
-export default function Puzzle({ words, name, code, users }) {
+export default function Puzzle({ words, name, code, users, time }) {
+    const allWordIds = words.map((word) => {
+        return word.id;
+    });
+    const allUsers = users.map((user) => {
+        user.active = false;
+        return user;
+    });
+
+    const [puzUsers, setPuzUsers] = useState([
+        {
+            games_users_id: "Solution",
+            name: "Solution",
+            solved: allWordIds,
+            active: false,
+        },
+        ...allUsers,
+        {
+            games_users_id: "Blank Board",
+            name: "Blank Board",
+            solved: [],
+            active: true,
+        },
+    ]);
     const [lines, setLines] = useState([]);
     const [showWords, setShowWords] = useState(true);
 
     useEffect(() => {
         buildLines();
-        buildAnswers();
-    }, [code]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [code, puzUsers]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const buildLines = () => {
         let charPosition = 0;
@@ -37,6 +59,93 @@ export default function Puzzle({ words, name, code, users }) {
                         id: uuid(),
                     };
                     newLines.push(newLine);
+                }
+            }
+        }
+        let puzWords = [];
+        puzUsers.forEach((user) => {
+            if (user.active) {
+                if (user.solved.length > 0) {
+                    user.solved.forEach((id) => {
+                        for (let word of words) {
+                            if (word.id === id) {
+                                puzWords.push(word);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        const newAnswers = [];
+        for (let word of puzWords) {
+            let { position, direction } = word;
+            let letters = word.word.split("");
+            for (let letter of letters) {
+                const newItem = {
+                    position: position,
+                    character: letter,
+                };
+                newAnswers.push(newItem);
+                if (direction === "Up") {
+                    position = goUp(position);
+                }
+                if (direction === "Down") {
+                    position = goDown(position);
+                }
+                if (direction === "UpLeft") {
+                    position = goUpLeft(position);
+                }
+                if (direction === "Left") {
+                    position = goLeft(position);
+                }
+                if (direction === "DownLeft") {
+                    position = goDownLeft(position);
+                }
+                if (direction === "UpRight") {
+                    position = goUpRight(position);
+                }
+                if (direction === "Right") {
+                    position = goRight(position);
+                }
+                if (direction === "DownRight") {
+                    position = goDownRight(position);
+                }
+            }
+        }
+        const colorArray = [];
+        let colors = [
+            "cyan",
+            "red",
+            "green",
+            "orange",
+            "pink",
+            "yellow",
+            "purple",
+            "brown",
+            "silver",
+        ];
+        let colorNumber = 0;
+        let position = 0;
+        for (let word of puzWords) {
+            let newPosition = position + word.word.length;
+            for (let i = position; i < newPosition; i++) {
+                colorNumber = colorNumber % (colors.length - 1);
+                let color = colors[colorNumber];
+                const newObj = {
+                    position: newAnswers[i].position,
+                    color: color,
+                };
+                colorArray.push(newObj);
+            }
+            position = newPosition;
+            ++colorNumber;
+        }
+        for (let lines of newLines) {
+            for (let line of lines.text) {
+                for (let position of colorArray) {
+                    if (position.position === line.id) {
+                        line.color = position.color;
+                    }
                 }
             }
         }
@@ -91,48 +200,20 @@ export default function Puzzle({ words, name, code, users }) {
         return newPosition;
     };
 
-    const buildAnswers = () => {
-        const newAnswers = [];
-        for (let word of words) {
-            let { position, direction } = word;
-            let letters = word.word.split("");
-            for (let letter of letters) {
-                const newItem = {
-                    position: position,
-                    character: letter,
-                };
-                newAnswers.push(newItem);
-                if (direction === "Up") {
-                    position = goUp(position);
-                }
-                if (direction === "Down") {
-                    position = goDown(position);
-                }
-                if (direction === "UpLeft") {
-                    position = goUpLeft(position);
-                }
-                if (direction === "Left") {
-                    position = goLeft(position);
-                }
-                if (direction === "DownLeft") {
-                    position = goDownLeft(position);
-                }
-                if (direction === "UpRight") {
-                    position = goUpRight(position);
-                }
-                if (direction === "Right") {
-                    position = goRight(position);
-                }
-                if (direction === "DownRight") {
-                    position = goDownRight(position);
-                }
-            }
-        }
-    };
-
     const toggleWords = (e) => {
         e.preventDefault();
         setShowWords(!showWords);
+    };
+
+    const onUserClick = (e) => {
+        setPuzUsers(
+            puzUsers.map((user) =>
+                // eslint-disable-next-line
+                user.games_users_id == e.target.id
+                    ? { ...user, active: true }
+                    : { ...user, active: false }
+            )
+        );
     };
 
     return (
@@ -170,6 +251,7 @@ export default function Puzzle({ words, name, code, users }) {
             </div>
             {showWords && (
                 <div className={puzzle.wordsToFind}>
+                    <p>{time} seconds</p>
                     <h1>WORDS</h1>
                     <ul>
                         {words.map((word) => (
@@ -193,8 +275,14 @@ export default function Puzzle({ words, name, code, users }) {
             <div className={puzzle.users}>
                 <h1>Users</h1>
                 <ul>
-                    {users.map((user) => (
-                        <li id={user.games_users_id} key={user.games_users_id}>
+                    {puzUsers.map((user) => (
+                        // className for active and onclick to change active.
+                        <li
+                            id={user.games_users_id}
+                            key={user.games_users_id}
+                            className={user.active ? "active" : ""}
+                            onClick={onUserClick}
+                        >
                             {user.name}
                         </li>
                     ))}
