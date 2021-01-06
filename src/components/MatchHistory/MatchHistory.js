@@ -37,7 +37,11 @@ export default function MatchHistory({ email }) {
         return (
             <div className={puzzle.spacer}>
                 <div className={puzzle.background}>
-                    <PuzzleView puzzle={puzzleView} leavePuzzle={leavePuzzle} />
+                    <PuzzleView
+                        puzzle={puzzleView}
+                        leavePuzzle={leavePuzzle}
+                        email={email}
+                    />
                 </div>
             </div>
         );
