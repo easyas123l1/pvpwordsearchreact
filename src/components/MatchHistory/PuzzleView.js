@@ -1,7 +1,7 @@
 import React from "react";
 import Puzzle from "./Puzzle";
 
-export default function PuzzleView({ puzzle, leavePuzzle }) {
+export default function PuzzleView({ puzzle, leavePuzzle, email }) {
     return (
         <div>
             <button onClick={leavePuzzle}>leave puzzle view</button>
@@ -11,6 +11,7 @@ export default function PuzzleView({ puzzle, leavePuzzle }) {
                 code={puzzle.code}
                 users={puzzle.users}
                 time={puzzle.time}
+                email={email}
             />
         </div>
     );
