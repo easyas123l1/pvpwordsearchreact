@@ -29,6 +29,7 @@ export default function Puzzle({ words, name, code, users, time }) {
     ]);
     const [lines, setLines] = useState([]);
     const [showWords, setShowWords] = useState(true);
+    const [puzWords, setPuzWords] = useState(words);
 
     useEffect(() => {
         buildLines();
@@ -62,14 +63,14 @@ export default function Puzzle({ words, name, code, users, time }) {
                 }
             }
         }
-        let puzWords = [];
+        let puzzleWords = [];
         puzUsers.forEach((user) => {
             if (user.active) {
                 if (user.solved.length > 0) {
                     user.solved.forEach((id) => {
                         for (let word of words) {
                             if (word.id === id) {
-                                puzWords.push(word);
+                                puzzleWords.push(word);
                             }
                         }
                     });
@@ -77,7 +78,7 @@ export default function Puzzle({ words, name, code, users, time }) {
             }
         });
         const newAnswers = [];
-        for (let word of puzWords) {
+        for (let word of puzzleWords) {
             let { position, direction } = word;
             let letters = word.word.split("");
             for (let letter of letters) {
@@ -113,6 +114,7 @@ export default function Puzzle({ words, name, code, users, time }) {
             }
         }
         const colorArray = [];
+        let colorWords = {};
         let colors = [
             "cyan",
             "red",
@@ -126,20 +128,37 @@ export default function Puzzle({ words, name, code, users, time }) {
         ];
         let colorNumber = 0;
         let position = 0;
-        for (let word of puzWords) {
+        for (let word of puzzleWords) {
             let newPosition = position + word.word.length;
+            colorNumber = colorNumber % (colors.length - 1);
+            let color = colors[colorNumber];
             for (let i = position; i < newPosition; i++) {
-                colorNumber = colorNumber % (colors.length - 1);
-                let color = colors[colorNumber];
                 const newObj = {
                     position: newAnswers[i].position,
                     color: color,
                 };
                 colorArray.push(newObj);
             }
+            colorWords[word.word] = color + "word";
             position = newPosition;
             ++colorNumber;
         }
+        setPuzWords(
+            puzWords.map((puzWord) => {
+                let solvedWord = false;
+                for (let word of puzzleWords) {
+                    if (puzWord.id === word.id) {
+                        solvedWord = true;
+                    }
+                }
+                if (solvedWord) {
+                    let color = colorWords[puzWord.word];
+                    return { ...puzWord, color: color };
+                } else {
+                    return { ...puzWord, color: "" };
+                }
+            })
+        );
         for (let lines of newLines) {
             for (let line of lines.text) {
                 for (let position of colorArray) {
@@ -254,7 +273,7 @@ export default function Puzzle({ words, name, code, users, time }) {
                     <p>{time} seconds</p>
                     <h1>WORDS</h1>
                     <ul>
-                        {words.map((word) => (
+                        {puzWords.map((word) => (
                             <li
                                 id={word.id}
                                 key={word.id}
