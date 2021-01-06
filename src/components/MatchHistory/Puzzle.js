@@ -3,7 +3,7 @@ import puzzle from "../../styles/puzzle.module.scss";
 import { v4 as uuid } from "uuid";
 import classnames from "classnames";
 
-export default function Puzzle({ words, name, code, users, time }) {
+export default function Puzzle({ words, name, code, users, time, email }) {
     const allWordIds = words.map((word) => {
         return word.id;
     });
@@ -302,7 +302,7 @@ export default function Puzzle({ words, name, code, users, time }) {
                             className={user.active ? "active" : ""}
                             onClick={onUserClick}
                         >
-                            {user.name}
+                            {user.name} {user.email === email ? "(you)" : ""}
                         </li>
                     ))}
                 </ul>
