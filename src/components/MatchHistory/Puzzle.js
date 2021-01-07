@@ -271,7 +271,7 @@ export default function Puzzle({ words, name, code, users, time, email }) {
             {showWords && (
                 <div className={puzzle.wordsToFind}>
                     <p>{time} seconds</p>
-                    <h1>WORDS</h1>
+                    <h1>{puzWords.length} WORDS</h1>
                     <ul>
                         {puzWords.map((word) => (
                             <li
@@ -302,7 +302,8 @@ export default function Puzzle({ words, name, code, users, time, email }) {
                             className={user.active ? "active" : ""}
                             onClick={onUserClick}
                         >
-                            {user.name} {user.email === email ? "(you)" : ""}
+                            {user.name} {user.email === email ? "(you)" : ""}{" "}
+                            solved {user.solved.length}
                         </li>
                     ))}
                 </ul>
