@@ -4,7 +4,6 @@ import Puzzle from "./Puzzle";
 export default function PuzzleView({ puzzle, leavePuzzle, email }) {
     return (
         <div>
-            <button onClick={leavePuzzle}>leave puzzle view</button>
             <Puzzle
                 words={puzzle.words}
                 name={puzzle.name}
@@ -13,6 +12,7 @@ export default function PuzzleView({ puzzle, leavePuzzle, email }) {
                 time={puzzle.time}
                 email={email}
             />
+            <button onClick={leavePuzzle}>leave puzzle view</button>
         </div>
     );
 }
