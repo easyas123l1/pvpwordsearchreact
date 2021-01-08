@@ -18,18 +18,9 @@ const NavBar = ({ loggedIn, imageUrl }) => {
 
     return (
         <div className={puzzle.navBar}>
-            <div>
-                <Link
-                    to="/home"
-                    className={puzzle.aTag}
-                    activeStyle={{ color: "#ffb81c" }}
-                >
-                    Home
-                </Link>
-            </div>
             {loggedIn && (
                 <>
-                    <div>
+                    {/* <div>
                         <Link
                             to="/socketGame"
                             className={puzzle.aTag}
@@ -37,7 +28,7 @@ const NavBar = ({ loggedIn, imageUrl }) => {
                         >
                             Play
                         </Link>
-                    </div>
+                    </div> */}
                     <div>
                         <img
                             onClick={() => setDropdown(!dropdown)}
@@ -48,8 +39,10 @@ const NavBar = ({ loggedIn, imageUrl }) => {
                         />
                         {dropdown && (
                             <div className={puzzle.dropdown}>
+                                <Link to="/home">Home</Link>
                                 <Link to="/profile">Profile</Link>
-                                <Link to="/matchHistory">Match History</Link>
+                                <Link to="/socketGame">Play</Link>
+                                <Link to="/matchHistory">History</Link>
                                 <button onClick={(e) => logout(e)}>
                                     logout
                                 </button>
@@ -60,6 +53,13 @@ const NavBar = ({ loggedIn, imageUrl }) => {
             )}
             {!loggedIn && (
                 <div>
+                    {/* <Link
+                        to="/home"
+                        className={puzzle.aTag}
+                        activeStyle={{ color: "#ffb81c" }}
+                    >
+                        Home
+                    </Link> */}
                     <button id="loginButton">Sign in</button>
                 </div>
             )}
