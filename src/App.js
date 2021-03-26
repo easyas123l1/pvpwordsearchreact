@@ -10,6 +10,8 @@ import SocketGame from "./components/SocketGame/SocketGame";
 import FirstLogin from "./components/FirstLogin/FirstLogin";
 import Profile from "./components/Profile/Profile";
 import MatchHistory from "./components/MatchHistory/MatchHistory";
+import WorldRecord from "./components/WorldRecord/WorldRecord";
+import WorldRecordWords from "./components/WorldRecord/WorldRecordWords";
 import axios from "axios";
 
 export const socket = io(
@@ -192,6 +194,11 @@ function App({ loginUser, loggedInStatus }) {
                             )}
                         />
                     )}
+                    <Route path="/worldRecord" component={WorldRecord} />
+                    <Route
+                        path="/worldRecordWords"
+                        component={WorldRecordWords}
+                    />
                     <Route component={LandingPage} />
                     {/* default route incase route doesn't exist */}
                 </Switch>
