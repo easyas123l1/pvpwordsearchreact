@@ -57,17 +57,21 @@ const LandingPage = () => {
                                 but if you're looking for a real challenge try
                                 checking out our World Record Puzzle!
                             </p>
+                            <p style={{ color: "yellow" }}>
+                                *WARNING* Loading World Record Puzzle may take
+                                some time *WARNING*
+                            </p>
                             <p>
                                 View our{" "}
                                 <a href="/worldRecord">
-                                    Guinesses World Record Puzzle Here!
+                                    World Record Puzzle Here!
                                 </a>{" "}
                                 The puzzle 500x500 with 14,994 words!
                             </p>
                             <p>
                                 View all 14,994 words here{" "}
                                 <a href="/worldRecordWords">
-                                    Guinesses World Record Words To Find!
+                                    World Record Words To Find!
                                 </a>
                             </p>
                         </div>
