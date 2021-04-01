@@ -5,7 +5,7 @@ export default function Profile({ email, name }) {
     return (
         <div className={puzzle.spacer}>
             <div className={puzzle.background}>
-                <p>hi {name}</p>
+                <p>Hi {name} this page is coming soon!</p>
             </div>
         </div>
     );
