@@ -15,19 +15,13 @@ const LandingPage = () => {
                     <div className={puzzle.features}>
                         <h1>Create Puzzles With Our Puzzle Generator</h1>
                         <div className={puzzle.featureDescription}>
+                            <p>Sign in simply with a Google account.</p>
                             <p>
-                                <a href="/register">Register</a> an account with
-                                us and create your own custom word search
-                                puzzle!
+                                Find a puzzle join and compete against others!
                             </p>
                             <p>
-                                With our language filter safely let students
-                                create their own word search with peace of mind
-                                knowing it will be school friendly!
-                            </p>
-                            <p>
-                                Save your puzzle and share it with your friends
-                                and family!
+                                Compete against others in randomly generated
+                                word search puzzles!
                             </p>
                         </div>
                     </div>
@@ -35,17 +29,17 @@ const LandingPage = () => {
                         <h1>Play Puzzles You & Others Create</h1>
                         <div className={puzzle.featureDescription}>
                             <p>
-                                Play from our user created puzzles{" "}
-                                <a href="/allPuzzles">view puzzles</a>! All of
-                                our puzzles are child friendly!
+                                View your puzzle history and see how you compare
+                                to others!
                             </p>
                             <p>
-                                Print out any puzzle to be done away from the
-                                computer or in the classroom!
+                                Leaderboards coming soon along with many, many
+                                more features!
                             </p>
                             <p>
-                                Play against classmates to see who can get the
-                                fastest time!!
+                                Share us with friends and family and compete
+                                against each other to see who is the ultimate
+                                word search solver!
                             </p>
                         </div>
                     </div>
