@@ -513,3 +513,16 @@ a:hover {
 .printWordsToFindUl li {
     width: 20%;
 }
+
+.matchHistory {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%;
+    width: 100%;
+    justify-content: space-evenly;
+    border: 1px solid white;
+}
+
+.matchHistory p {
+    margin: 1%;
+}
