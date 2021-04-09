@@ -533,3 +533,23 @@ a:hover {
     top: 1%;
     left: 5%;
 }
+
+.firstLogin {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    color: white;
+}
+
+.submitName {
+    width: 10%;
+    margin-top: 2%;
+}
+
+.entername {
+    margin: 2%;
+}
