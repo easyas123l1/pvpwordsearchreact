@@ -22,8 +22,8 @@ export default function MatchHistory({ email }) {
     useEffect(() => {
         axios
             .post(
-                // "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user/history",
-                "http://localhost:4999/puzzle/user/history",
+                "https://pvpwordsearc-master-fyw6qrqfuj.herokuapp.com/puzzle/user/history",
+                // "http://localhost:4999/puzzle/user/history",
                 { email }
             )
             .then((res) => {
