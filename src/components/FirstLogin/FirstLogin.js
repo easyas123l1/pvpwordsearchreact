@@ -13,7 +13,8 @@ export default function FirstLogin({ createName }) {
         createName(name);
     };
     return (
-        <div>
+        <div className={puzzle.firstLogin}>
+            <p className={puzzle.entername}>Enter a user name: </p>
             <input
                 type="text"
                 name="maximumWordSize"
@@ -21,8 +22,9 @@ export default function FirstLogin({ createName }) {
                 value={name}
                 className={puzzle.inputField}
             />
-            <button onClick={buttonSubmit}>submit name</button>
-            <p className={puzzle.puzzleParagraph}>first login wow</p>
+            <button className={puzzle.submitName} onClick={buttonSubmit}>
+                Submit Name
+            </button>
         </div>
     );
 }
