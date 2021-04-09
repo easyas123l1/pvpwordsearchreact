@@ -42,13 +42,14 @@
 .joinGameBox {
     display: flex;
     border: 1px solid white;
-    padding: 10px;
     flex-direction: row;
-    margin: 5px;
+    margin-top: 1%;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .joinGameBox p {
-    padding: 5px;
+    margin: 1%;
 }
 
 .wordsToFind ul {
@@ -525,4 +526,10 @@ a:hover {
 
 .matchHistory p {
     margin: 1%;
+}
+
+.createGameScreen {
+    position: fixed;
+    top: 1%;
+    left: 5%;
 }
