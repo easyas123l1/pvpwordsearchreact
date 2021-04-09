@@ -15,8 +15,11 @@ const MainScreenFindCreateGame = ({
             <div className={puzzle.spacer}>
                 <div className={puzzle.background}>
                     <div>
-                        <button onClick={() => setCreatingGame(false)}>
-                            Go Back to join a lobby
+                        <button
+                            className={puzzle.createGameScreen}
+                            onClick={() => setCreatingGame(false)}
+                        >
+                            Join a lobby
                         </button>
                         <p>Create a lobby...</p>
                         <p>Name</p>
@@ -83,7 +86,10 @@ const MainScreenFindCreateGame = ({
         return (
             <div className={puzzle.spacer}>
                 <div className={puzzle.background}>
-                    <button onClick={() => setCreatingGame(true)}>
+                    <button
+                        className={puzzle.createGameScreen}
+                        onClick={() => setCreatingGame(true)}
+                    >
                         Create a lobby
                     </button>
                     <p>Join a lobby</p>
