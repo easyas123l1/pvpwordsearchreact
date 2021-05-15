@@ -453,6 +453,12 @@ a:hover {
     a:hover {
         color: #ffb81c;
     }
+
+    @media screen and (max-width: 1000px) {
+        p {
+            font-size: 0.8rem;
+        }
+    }
 }
 
 .landingPage {
@@ -460,6 +466,10 @@ a:hover {
     flex-direction: row;
     width: 100%;
     height: calc(62vh - 4px);
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+        height: max-content;
+    }
 }
 
 .features {
@@ -469,6 +479,9 @@ a:hover {
     display: flex;
     flex-direction: column;
     text-align: center;
+    @media screen and (max-width: 1000px) {
+        width: 100%;
+    }
 }
 
 .featureDescription {
@@ -477,6 +490,9 @@ a:hover {
     flex-direction: column;
     justify-content: space-evenly;
     background-color: rgb(0 0 0);
+    @media screen and (max-width: 1000px) {
+        width: 100%;
+    }
 }
 
 .printPuzzle {
