@@ -37,6 +37,9 @@
     justify-content: center;
     text-align: center;
     background-color: black;
+    @media screen and (max-width: 1000px) {
+        transform: translateX(-50px);
+    }
 }
 
 .joinGameBox {
