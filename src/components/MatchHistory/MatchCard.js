@@ -8,10 +8,10 @@ export default function MatchCard({ puzzle, viewPuzzle }) {
     return (
         <div className={puzzles.matchHistory}>
             <p>Name: {puzzle.name}</p>
-            <p>description: {puzzle.description}</p>
-            <p>maximum word length: {puzzle.maximum_word_length}</p>
-            <p>minimum word length: {puzzle.minimum_word_length}</p>
-            <p>Mumber of words: {puzzle.number_of_words}</p>
+            <p>Description: {puzzle.description}</p>
+            <p>Maximum word length: {puzzle.maximum_word_length}</p>
+            <p>Minimum word length: {puzzle.minimum_word_length}</p>
+            <p>Number of words: {puzzle.number_of_words}</p>
             <p>Rating: coming soon! {puzzle.rating}</p>
             <p>
                 Size: {puzzle.size}x{puzzle.size}

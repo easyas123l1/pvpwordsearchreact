@@ -69,7 +69,6 @@ const WorldRecord = () => {
                         ))}
                     </ul>
                 </div>
-                <Footer />
             </div>
         );
     }

@@ -86,7 +86,6 @@ const WorldRecordWords = () => {
                         ))}
                     </ul>
                 </div>
-                <Footer />
             </div>
         );
     }

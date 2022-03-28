@@ -34,8 +34,8 @@ const NavBar = ({ loggedIn, imageUrl }) => {
                             onClick={() => setDropdown(!dropdown)}
                             className={puzzle.imageURL}
                             src={imageUrl}
-                            role="button"
                             alt="drop-down"
+                            role="button"
                         />
                         {dropdown && (
                             <div className={puzzle.dropdown}>

@@ -26,15 +26,18 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className={puzzle.features}>
-                        <h1>Play Puzzles You & Others Create</h1>
+                        <h1>Play Puzzles You & Others Create Safely</h1>
                         <div className={puzzle.featureDescription}>
                             <p>
-                                View your puzzle history and see how you compare
-                                to others!
+                                Safety is very important to us: With our child
+                                safe word filter that we carefully monitor and
+                                keep updated you can trust our games to be the
+                                safest wordsearch games on the internet!
                             </p>
                             <p>
-                                Leaderboards coming soon along with many, many
-                                more features!
+                                View your puzzle history and see how you compare
+                                to others! Coming Soon Leaderboards and new game
+                                modes + more features!
                             </p>
                             <p>
                                 Share us with friends and family and compete

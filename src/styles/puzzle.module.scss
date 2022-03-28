@@ -175,7 +175,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: calc(97vh - 4px);
+    min-height: calc(100vh);
     height: max-content;
 }
 
@@ -468,7 +468,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: calc(62vh - 4px);
+    height: calc(65vh - 32px);
     @media screen and (max-width: 1000px) {
         flex-direction: column;
         height: max-content;
